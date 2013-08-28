@@ -1,0 +1,13 @@
+/**
+ * @version		3.0.0
+ * @package		Simple Image Gallery (plugin)
+ * @author    JoomlaWorks - http://www.joomlaworks.net
+ * @copyright	Copyright (c) 2006 - 2013 JoomlaWorks Ltd. All rights reserved.
+ * @license		GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ */
+
+/* This stylesheet is used to hide galleries on page print outs */
+@media print {
+	.sigFreeContainer {display:none;}
+	.sigFreePrintMessage {display:block;color:#999;font-size:14px;padding:8px 0;}
+}
