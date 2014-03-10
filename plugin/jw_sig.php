@@ -46,7 +46,7 @@ class plgContentJw_sig extends JPlugin {
 
 	// The main function
 	function renderSimpleImageGallery(&$row, &$params, $page = 0){
-	
+
 		// API
 		jimport('joomla.filesystem.file');
     $mainframe = JFactory::getApplication();
@@ -58,10 +58,12 @@ class plgContentJw_sig extends JPlugin {
 		if (version_compare(JVERSION, '1.6.0', 'ge'))
 		{
 			$pluginLivePath = $siteUrl.'/plugins/content/'.$this->plg_name.'/'.$this->plg_name;
+			$defaultImagePath = 'images';
 		}
 		else
 		{
 			$pluginLivePath = $siteUrl.'/plugins/content/'.$this->plg_name;
+			$defaultImagePath = 'images/stories';
 		}
 
 		// Check if plugin is enabled
@@ -106,13 +108,13 @@ class plgContentJw_sig extends JPlugin {
 		{
 			return;
 		}
-		
+
 		// Check if Simple Image Gallery Free (old) is present and show a warning
 		if (JPluginHelper::isEnabled('content', 'jw_simpleImageGallery') == true)
 		{
 			JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_OLD_SIG'));
 			return;
-		}	
+		}
 
 		// ----------------------------------- Get plugin parameters -----------------------------------
 
@@ -152,7 +154,7 @@ class plgContentJw_sig extends JPlugin {
 
 		// Other assignments
 		$transparent = $pluginLivePath.'/includes/images/transparent.gif';
-		
+
 		// When used with K2 extra fields
 		if (!isset($row->title))
 			$row->title = '';
@@ -163,7 +165,7 @@ class plgContentJw_sig extends JPlugin {
 			$this->plg_copyrights_start = '';
 			$this->plg_copyrights_end = '';
 		}
-		
+
 		// ----------------------------------- Prepare the output -----------------------------------
 
 		// Process plugin tags
@@ -182,7 +184,7 @@ class plgContentJw_sig extends JPlugin {
 				} else {
 					$galleryFolder 	= $tagcontent;
 				}
-				
+
 				// HTML & CSS assignments
 				$srcimgfolder = $galleries_rootfolder.'/'.$galleryFolder;
 				$gal_id = substr(md5($key.$srcimgfolder), 1, 10);
