@@ -1,9 +1,9 @@
 <?php
 /**
- * @version		3.0.0
+ * @version		3.0.1
  * @package		Simple Image Gallery (plugin)
- * @author    JoomlaWorks - http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2013 JoomlaWorks Ltd. All rights reserved.
+ * @author    	JoomlaWorks - http://www.joomlaworks.net
+ * @copyright	Copyright (c) 2006 - 2014 JoomlaWorks Ltd. All rights reserved.
  * @license		GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -18,10 +18,10 @@ if (version_compare(JVERSION, '1.6.0', 'ge')){
 class plgContentJw_sig extends JPlugin {
 
   // JoomlaWorks reference parameters
-	var $plg_name								= "jw_sig";
-	var $plg_tag								= "gallery";
-	var $plg_copyrights_start		= "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.0) starts here -->\n";
-	var $plg_copyrights_end			= "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.0) ends here -->\n\n";
+	var $plg_name					= "jw_sig";
+	var $plg_tag					= "gallery";
+	var $plg_copyrights_start		= "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.1) starts here -->\n";
+	var $plg_copyrights_end			= "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.1) ends here -->\n\n";
 
 	function plgContentJw_sig( &$subject, $params ){
 		parent::__construct( $subject, $params );
@@ -33,14 +33,12 @@ class plgContentJw_sig extends JPlugin {
 	}
 
 	// Joomla! 1.5
-	function onPrepareContent(&$row, &$params, $page = 0)
-	{
+	function onPrepareContent(&$row, &$params, $page = 0){
 		$this->renderSimpleImageGallery($row, $params, $page = 0);
 	}
 
 	// Joomla! 2.5+
-	function onContentPrepare($context, &$row, &$params, $page = 0)
-	{
+	function onContentPrepare($context, &$row, &$params, $page = 0){
 		$this->renderSimpleImageGallery($row, $params, $page = 0);
 	}
 
@@ -49,19 +47,16 @@ class plgContentJw_sig extends JPlugin {
 
 		// API
 		jimport('joomla.filesystem.file');
-    $mainframe = JFactory::getApplication();
+		$mainframe = JFactory::getApplication();
 		$document  = JFactory::getDocument();
 
 		// Assign paths
 		$sitePath = JPATH_SITE;
 		$siteUrl  = JURI::root(true);
-		if (version_compare(JVERSION, '1.6.0', 'ge'))
-		{
+		if (version_compare(JVERSION, '1.6.0', 'ge')){
 			$pluginLivePath = $siteUrl.'/plugins/content/'.$this->plg_name.'/'.$this->plg_name;
 			$defaultImagePath = 'images';
-		}
-		else
-		{
+		} else {
 			$pluginLivePath = $siteUrl.'/plugins/content/'.$this->plg_name;
 			$defaultImagePath = 'images/stories';
 		}
@@ -92,26 +87,22 @@ class plgContentJw_sig extends JPlugin {
 		JPlugin::loadLanguage('plg_content_'.$this->plg_name, JPATH_ADMINISTRATOR);
 
 		// Check for basic requirements
-		if (!extension_loaded('gd') && !function_exists('gd_info'))
-		{
+		if (!extension_loaded('gd') && !function_exists('gd_info')){
 			JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_01'));
 			return;
 		}
-		if (!is_writable($sitePath.DS.'cache'))
-		{
+		if (!is_writable($sitePath.DS.'cache')){
 			JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_02'));
 			return;
 		}
 
 		// Check if Simple Image Gallery Pro is present and mute
-		if (JPluginHelper::isEnabled('content', 'jw_sigpro') == true)
-		{
+		if (JPluginHelper::isEnabled('content', 'jw_sigpro') == true){
 			return;
 		}
 
 		// Check if Simple Image Gallery Free (old) is present and show a warning
-		if (JPluginHelper::isEnabled('content', 'jw_simpleImageGallery') == true)
-		{
+		if (JPluginHelper::isEnabled('content', 'jw_simpleImageGallery') == true){
 			JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_OLD_SIG'));
 			return;
 		}
@@ -122,15 +113,14 @@ class plgContentJw_sig extends JPlugin {
 		$plugin = JPluginHelper::getPlugin('content', $this->plg_name);
 
 		// Control external parameters and set variable for controlling plugin layout within modules
-		if (!$params)
-			$params = class_exists('JParameter') ? new JParameter(null) : new JRegistry(null);
+		if (!$params) $params = class_exists('JParameter') ? new JParameter(null) : new JRegistry(null);
 		$parsedInModule = $params->get('parsedInModule');
 
 		$pluginParams = class_exists('JParameter') ? new JParameter($plugin->params) : new JRegistry($plugin->params);
 
 		$galleries_rootfolder = ($params->get('galleries_rootfolder')) ? $params->get('galleries_rootfolder') : $pluginParams->get('galleries_rootfolder', $defaultImagePath);
 		$popup_engine = 'jquery_fancybox';
-		$jQueryHandling = $pluginParams->get('jQueryHandling', '1.8');
+		$jQueryHandling = $pluginParams->get('jQueryHandling', '1.8.3');
 		$thb_template = 'Classic';
 		$thb_width = (!is_null($params->get('thb_width', null))) ? $params->get('thb_width') : $pluginParams->get('thb_width', 200);
 		$thb_height = (!is_null($params->get('thb_height', null))) ? $params->get('thb_height') : $pluginParams->get('thb_height', 160);
@@ -144,10 +134,8 @@ class plgContentJw_sig extends JPlugin {
 
 		// Cleanups
 		// Remove first and last slash if they exist
-		if (substr($galleries_rootfolder, 0, 1) == '/')
-			$galleries_rootfolder = substr($galleries_rootfolder, 1);
-		if (substr($galleries_rootfolder, -1, 1) == '/')
-			$galleries_rootfolder = substr($galleries_rootfolder, 0, -1);
+		if (substr($galleries_rootfolder, 0, 1) == '/') $galleries_rootfolder = substr($galleries_rootfolder, 1);
+		if (substr($galleries_rootfolder, -1, 1) == '/') $galleries_rootfolder = substr($galleries_rootfolder, 0, -1);
 
 		// Includes
 		require_once (dirname(__FILE__).DS.$this->plg_name.DS.'includes'.DS.'helper.php');
@@ -156,12 +144,10 @@ class plgContentJw_sig extends JPlugin {
 		$transparent = $pluginLivePath.'/includes/images/transparent.gif';
 
 		// When used with K2 extra fields
-		if (!isset($row->title))
-			$row->title = '';
+		if (!isset($row->title)) $row->title = '';
 
 		// Variable cleanups for K2
-		if (JRequest::getCmd('format') == 'raw')
-		{
+		if (JRequest::getCmd('format') == 'raw'){
 			$this->plg_copyrights_start = '';
 			$this->plg_copyrights_end = '';
 		}
@@ -169,12 +155,10 @@ class plgContentJw_sig extends JPlugin {
 		// ----------------------------------- Prepare the output -----------------------------------
 
 		// Process plugin tags
-		if (preg_match_all($regex, $row->text, $matches, PREG_PATTERN_ORDER) > 0)
-		{
+		if (preg_match_all($regex, $row->text, $matches, PREG_PATTERN_ORDER) > 0){
 
 			// start the replace loop
-			foreach ($matches[0] as $key => $match)
-			{
+			foreach ($matches[0] as $key => $match){
 
 				$tagcontent = preg_replace("/{.+?}/", "", $match);
 
@@ -192,15 +176,13 @@ class plgContentJw_sig extends JPlugin {
 				// Render the gallery
 				$gallery = SimpleImageGalleryHelper::renderGallery($srcimgfolder, $thb_width, $thb_height, $smartResize, $jpg_quality, $cache_expire_time, $gal_id);
 
-				if (!$gallery)
-				{
+				if (!$gallery){
 					JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_03').' '.$srcimgfolder);
 					continue;
 				}
 
 				// CSS & JS includes: Append head includes, but not when we're outputing raw content (like in K2)
-				if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html')
-				{
+				if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html'){
 
 					// Initiate variables
 					$relName = '';
@@ -212,17 +194,13 @@ class plgContentJw_sig extends JPlugin {
 					$popupPath = "{$pluginLivePath}/includes/js/{$popup_engine}";
 					$popupRequire = dirname(__FILE__).DS.$this->plg_name.DS.'includes'.DS.'js'.DS.$popup_engine.DS.'popup.php';
 
-					if (file_exists($popupRequire) && is_readable($popupRequire))
-					{
+					if (file_exists($popupRequire) && is_readable($popupRequire)){
 						require ($popupRequire);
 					}
 
-					if (version_compare(JVERSION, '1.6.0', 'ge'))
-					{
+					if (version_compare(JVERSION, '1.6.0', 'ge')){
 						JHtml::_('behavior.framework');
-					}
-					else
-					{
+					} else {
 						JHTML::_('behavior.mootools');
 					}
 
@@ -233,30 +211,19 @@ class plgContentJw_sig extends JPlugin {
 						foreach ($stylesheetDeclarations as $stylesheetDeclaration)
 							$document->addStyleDeclaration($stylesheetDeclaration);
 
-					if (strpos($popup_engine, 'jquery_') !== false && $jQueryHandling != 0)
-					{
-						if (version_compare(JVERSION, '3.0', 'ge')!==false)
-						{
+					if (strpos($popup_engine, 'jquery_') !== false && $jQueryHandling != 0){
+						if (version_compare(JVERSION, '3.0', 'ge')!==false){
 							JHtml::_('jquery.framework');
 						} else {
-							if($jQueryHandling=='1.9'){
-								$document->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
-							} else {
-								$document->addScript('//ajax.googleapis.com/ajax/libs/jquery/'.$jQueryHandling.'/jquery.min.js');
-							}
+							$document->addScript('//ajax.googleapis.com/ajax/libs/jquery/'.$jQueryHandling.'/jquery.min.js');
 						}
 					}
 
-					if (count($scripts))
-					{
-						foreach ($scripts as $script)
-						{
-							if (substr($script, 0, 4) == 'http' || substr($script, 0, 2) == '//')
-							{
+					if (count($scripts)){
+						foreach ($scripts as $script){
+							if (substr($script, 0, 4) == 'http' || substr($script, 0, 2) == '//'){
 								$document->addScript($script);
-							}
-							else
-							{
+							} else {
 								$document->addScript($popupPath.'/'.$script);
 							}
 						}
@@ -289,9 +256,7 @@ class plgContentJw_sig extends JPlugin {
 					$itemPrintURL = $websiteURL.$_SERVER['REQUEST_URI'];
 					$itemPrintURL = explode("#", $itemPrintURL);
 					$itemPrintURL = $itemPrintURL[0].'#sigFreeId'.$gal_id;
-				}
-				else
-				{
+				} else {
 					$itemPrintURL = false;
 				}
 
@@ -312,8 +277,7 @@ class plgContentJw_sig extends JPlugin {
 			}// end foreach
 
 			// Global head includes
-			if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html')
-			{
+			if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html'){
 				$document->addScript($pluginLivePath.'/includes/js/behaviour.js');
 			}
 

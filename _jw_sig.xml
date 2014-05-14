@@ -4,24 +4,25 @@
 	<author>JoomlaWorks</author>
 	<authorEmail>please-use-the-contact-form@joomlaworks.net</authorEmail>
 	<authorUrl>www.joomlaworks.net</authorUrl>
-	<copyright>Copyright (c) 2006 - 2013 JoomlaWorks Ltd. All rights reserved.</copyright>
-	<creationDate>May 27th, 2013</creationDate>
+	<copyright>Copyright (c) 2006 - 2014 JoomlaWorks Ltd. All rights reserved.</copyright>
+	<creationDate>May 14th, 2014</creationDate>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 	<description>JW_PLG_SIG_XML_DESC</description>
 	<!-- Parameters -->
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
 				<field name="galleries_rootfolder" type="text" default="images" label="JW_PLG_SIG_ROOTFOLDER" description="JW_PLG_SIG_ROOTFOLDER_DESC" />
-				<field name="jQueryHandling" type="list" default="1.8" label="JW_PLG_SIG_JQUERY_HANDLING" description="JW_PLG_SIG_JQUERY_HANDLING_DESC">
+				<field name="jQueryHandling" type="list" default="1.8.3" label="JW_PLG_SIG_JQUERY_HANDLING" description="JW_PLG_SIG_JQUERY_HANDLING_DESC">
 					<option value="0">JW_PLG_SIG_DO_NOT_LOAD_THE_JQUERY_LIBRARY</option>
-					<option value="1.5">JW_PLG_SIG_LOAD_V1_5_X_LATEST_COPY</option>
-					<option value="1.6">JW_PLG_SIG_LOAD_V1_6_X_LATEST_COPY</option>
-					<option value="1.7">JW_PLG_SIG_LOAD_V1_7_X_LATEST_COPY</option>
-					<option value="1.8">JW_PLG_SIG_LOAD_V1_8_X_LATEST_COPY</option>
-					<option value="1.9">JW_PLG_SIG_LOAD_V1_9_X_LATEST_COPY</option>
-					<option value="1">JW_PLG_SIG_LOAD_LATEST_COPY</option>
+					<option value="1.5.2">JW_PLG_SIG_LOAD_V1_5_X_LATEST_COPY</option>
+					<option value="1.6.4">JW_PLG_SIG_LOAD_V1_6_X_LATEST_COPY</option>
+					<option value="1.7.2">JW_PLG_SIG_LOAD_V1_7_X_LATEST_COPY</option>
+					<option value="1.8.3">JW_PLG_SIG_LOAD_V1_8_X_LATEST_COPY</option>
+					<option value="1.9.1">JW_PLG_SIG_LOAD_V1_9_X_LATEST_COPY</option>
+					<option value="1.10.2">JW_PLG_SIG_LOAD_V1_10_X_LATEST_COPY</option>
+					<option value="1.11.1">JW_PLG_SIG_LOAD_V1_11_X_LATEST_COPY</option>
 				</field>
 				<field name="thb_width" type="text" default="200" size="3" label="JW_PLG_SIG_TW" description="JW_PLG_SIG_TW_DESC" />
 				<field name="thb_height" type="text" default="160" size="3" label="JW_PLG_SIG_TH" description="JW_PLG_SIG_TH_DESC" />
