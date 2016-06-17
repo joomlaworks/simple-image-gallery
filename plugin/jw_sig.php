@@ -23,6 +23,16 @@ class plgContentJw_sig extends JPlugin {
 	var $plg_copyrights_start		= "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.1) starts here -->\n";
 	var $plg_copyrights_end			= "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.1) ends here -->\n\n";
 
+	/**
+	 * @inheritdoc
+	 *
+	 * Woraround to silence deprecation warnings, but keep PHP4 compatibility
+	 */
+	public function __construct(&$subject, $params = array())
+	{
+		return $this->plgContentJw_sig($subject, $params);
+	}
+
 	function plgContentJw_sig( &$subject, $params ){
 		parent::__construct( $subject, $params );
 
