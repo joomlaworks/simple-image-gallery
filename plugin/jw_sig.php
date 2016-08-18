@@ -113,7 +113,12 @@ class plgContentJw_sig extends JPlugin {
 		$plugin = JPluginHelper::getPlugin('content', $this->plg_name);
 
 		// Control external parameters and set variable for controlling plugin layout within modules
-		if (!$params) $params = class_exists('JParameter') ? new JParameter(null) : new JRegistry(null);
+		if (!$params) {
+			$params = class_exists('JParameter') ? new JParameter(null) : new JRegistry(null);
+		}
+		if(is_string($params)) {
+			$params = class_exists('JParameter') ? new JParameter($params) : new JRegistry($params);
+		}
 		$parsedInModule = $params->get('parsedInModule');
 
 		$pluginParams = class_exists('JParameter') ? new JParameter($plugin->params) : new JRegistry($plugin->params);
