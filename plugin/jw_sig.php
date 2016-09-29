@@ -195,6 +195,11 @@ class plgContentJw_sig extends JPlugin {
 					$extraWrapperClass = '';
 					$legacyHeadIncludes = '';
 					$customLinkAttributes = '';
+					// Declare variables used later
+					$stylesheets = null;
+					$stylesheetDeclarations = null;
+					$scripts = null;
+					$scriptDeclarations = null;
 
 					$popupPath = "{$pluginLivePath}/includes/js/{$popup_engine}";
 					$popupRequire = dirname(__FILE__).DS.$this->plg_name.DS.'includes'.DS.'js'.DS.$popup_engine.DS.'popup.php';
