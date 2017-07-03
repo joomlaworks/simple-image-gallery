@@ -4,10 +4,10 @@
 	<author>JoomlaWorks</author>
 	<authorEmail>please-use-the-contact-form@joomlaworks.net</authorEmail>
 	<authorUrl>www.joomlaworks.net</authorUrl>
-	<copyright>Copyright (c) 2006 - 2014 JoomlaWorks Ltd. All rights reserved.</copyright>
-	<creationDate>May 14th, 2014</creationDate>
+	<copyright>Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.</copyright>
+	<creationDate>July 3rd, 2017</creationDate>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>3.0.1</version>
+	<version>3.1.0</version>
 	<description>JW_PLG_SIG_XML_DESC</description>
 	<!-- Parameters -->
 	<config>

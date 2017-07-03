@@ -1,9 +1,9 @@
 <?php
 /**
- * @version		3.0.1
+ * @version		3.1.0
  * @package		Simple Image Gallery (plugin)
  * @author    	JoomlaWorks - http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2014 JoomlaWorks Ltd. All rights reserved.
+ * @copyright	Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.
  * @license		GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 

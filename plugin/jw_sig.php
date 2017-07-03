@@ -1,9 +1,9 @@
 <?php
 /**
- * @version		3.0.1
+ * @version		3.1.0
  * @package		Simple Image Gallery (plugin)
  * @author    	JoomlaWorks - http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2014 JoomlaWorks Ltd. All rights reserved.
+ * @copyright	Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.
  * @license		GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -17,14 +17,14 @@ if (version_compare(JVERSION, '1.6.0', 'ge')){
 
 class plgContentJw_sig extends JPlugin {
 
-  // JoomlaWorks reference parameters
+	// JoomlaWorks reference parameters
 	var $plg_name					= "jw_sig";
 	var $plg_tag					= "gallery";
-	var $plg_copyrights_start		= "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.1) starts here -->\n";
-	var $plg_copyrights_end			= "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.0.1) ends here -->\n\n";
+	var $plg_copyrights_start		= "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.1.0) starts here -->\n";
+	var $plg_copyrights_end			= "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.1.0) ends here -->\n\n";
 
-	function plgContentJw_sig( &$subject, $params ){
-		parent::__construct( $subject, $params );
+	public function __construct(&$subject, $params) {
+		parent::__construct($subject, $params);
 
 		// Define the DS constant under Joomla! 3.0+
 		if (!defined('DS')){
