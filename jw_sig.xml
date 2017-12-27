@@ -23,8 +23,6 @@
 		<param name="thb_width" type="text" default="200" size="3" label="JW_PLG_SIG_TW" description="JW_PLG_SIG_TW_DESC" />
 		<param name="thb_height" type="text" default="160" size="3" label="JW_PLG_SIG_TH" description="JW_PLG_SIG_TH_DESC" />
 		<param name="jpg_quality" type="text" default="80" size="3" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
-	</params>
-	<params group="advanced">
 		<param name="cache_expire_time" type="text" default="3600" size="3" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
 		<param name="memoryLimit" type="text" default="" size="3" label="JW_PLG_SIG_ML" description="JW_PLG_SIG_ML_DESC" />
 	</params>
