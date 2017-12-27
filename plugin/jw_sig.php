@@ -49,7 +49,6 @@ class plgContentJw_sig extends JPlugin
     // The main function
     public function renderSimpleImageGallery(&$row, &$params, $page = 0)
     {
-
         // API
         jimport('joomla.filesystem.file');
         $mainframe = JFactory::getApplication();
@@ -231,7 +230,11 @@ class plgContentJw_sig extends JPlugin
 
                     if (count($stylesheets)) {
                         foreach ($stylesheets as $stylesheet) {
-                            $document->addStyleSheet($popupPath.'/'.$stylesheet);
+                            if (substr($script, 0, 4) == 'http' || substr($script, 0, 2) == '//') {
+                                $document->addStyleSheet($stylesheet);
+                            } else {
+                                $document->addStyleSheet($popupPath.'/'.$stylesheet);
+                            }
                         }
                     }
                     if (count($stylesheetDeclarations)) {
@@ -244,7 +247,7 @@ class plgContentJw_sig extends JPlugin
                         if (version_compare(JVERSION, '3.0', 'ge')!==false) {
                             JHtml::_('jquery.framework');
                         } else {
-                            $document->addScript('//ajax.googleapis.com/ajax/libs/jquery/'.$jQueryHandling.'/jquery.min.js');
+                            $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/'.$jQueryHandling.'/jquery.min.js');
                         }
                     }
 

@@ -14,23 +14,17 @@ $relName = 'fancybox-button';
 $extraClass = 'fancybox-button';
 
 $stylesheets = array(
-	'fancybox/jquery.fancybox.css?v=2.1.5',
-	'fancybox/helpers/jquery.fancybox-buttons.css?v=2.1.5',
-	'fancybox/helpers/jquery.fancybox-thumbs.css?v=2.1.5'
+	'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css'
 );
 $stylesheetDeclarations = array();
 $scripts = array(
-	'fancybox/lib/jquery.mousewheel-3.0.6.pack.js',
-	'fancybox/jquery.fancybox.pack.js?v=2.1.5',
-	'fancybox/helpers/jquery.fancybox-buttons.js?v=2.1.5',
-	'fancybox/helpers/jquery.fancybox-thumbs.js?v=2.1.5'
+	'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js'
 );
 
 if(!defined('PE_FANCYBOX_LOADED')){
 	define('PE_FANCYBOX_LOADED', true);
 	$scriptDeclarations = array('
-		jQuery.noConflict();
-		jQuery(function($) {
+		(function($) {
 			$("a.fancybox-button").fancybox({
 				//padding: 0,
 				//fitToView	: false,
@@ -42,7 +36,7 @@ if(!defined('PE_FANCYBOX_LOADED')){
 					this.title = \'<b class="fancyboxCounter">'.JText::_('JW_PLG_SIG_FB_IMAGE').' \' + (this.index + 1) + \' '.JText::_('JW_PLG_SIG_FB_OF').' \' + this.group.length + \'</b>\' + (this.title ? \' | \' + this.title : \'\');
 				}
 			});
-		});
+		})(jQuery);
 	');
 } else {
 	$scriptDeclarations = array();
