@@ -1,7 +1,7 @@
 Simple Image Gallery
 ====================
 
-*** New version 3.0.x released, now compatible with Joomla 1.5 to 3.x ***
+*** New version 3.5.x released, compatible with Joomla versions 1.5 to 3.x ***
 
 Adding image galleries inside your Joomla articles is now super-easy and simple, using the magical "Simple Image Gallery" plugin for Joomla.
 
