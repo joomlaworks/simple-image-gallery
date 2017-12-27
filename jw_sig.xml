@@ -5,29 +5,27 @@
 	<authorEmail>please-use-the-contact-form@joomlaworks.net</authorEmail>
 	<authorUrl>www.joomlaworks.net</authorUrl>
 	<copyright>Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.</copyright>
-	<creationDate>July 3rd, 2017</creationDate>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>3.1.0</version>
+	<creationDate>December 27th, 2017</creationDate>
+	<license>https://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>3.5.0</version>
 	<description>JW_PLG_SIG_XML_DESC</description>
 	<!-- Parameters -->
 	<params>
 		<param name="galleries_rootfolder" type="text" default="images/stories" label="JW_PLG_SIG_ROOTFOLDER" description="JW_PLG_SIG_ROOTFOLDER_DESC" />
-		<param name="jQueryHandling" type="list" default="1.8.3" label="JW_PLG_SIG_JQUERY_HANDLING" description="JW_PLG_SIG_JQUERY_HANDLING_DESC">
+		<param name="jQueryHandling" type="list" default="1.12.4" label="JW_PLG_SIG_JQUERY_HANDLING" description="JW_PLG_SIG_JQUERY_HANDLING_DESC">
 			<option value="0">JW_PLG_SIG_DO_NOT_LOAD_THE_JQUERY_LIBRARY</option>
-			<option value="1.5.2">JW_PLG_SIG_LOAD_V1_5_X_LATEST_COPY</option>
-			<option value="1.6.4">JW_PLG_SIG_LOAD_V1_6_X_LATEST_COPY</option>
-			<option value="1.7.2">JW_PLG_SIG_LOAD_V1_7_X_LATEST_COPY</option>
 			<option value="1.8.3">JW_PLG_SIG_LOAD_V1_8_X_LATEST_COPY</option>
 			<option value="1.9.1">JW_PLG_SIG_LOAD_V1_9_X_LATEST_COPY</option>
 			<option value="1.10.2">JW_PLG_SIG_LOAD_V1_10_X_LATEST_COPY</option>
-			<option value="1.11.1">JW_PLG_SIG_LOAD_V1_11_X_LATEST_COPY</option>
+			<option value="1.11.3">JW_PLG_SIG_LOAD_V1_11_X_LATEST_COPY</option>
+			<option value="1.12.4">JW_PLG_SIG_LOAD_V1_12_X_LATEST_COPY</option>
 		</param>
 		<param name="thb_width" type="text" default="200" size="3" label="JW_PLG_SIG_TW" description="JW_PLG_SIG_TW_DESC" />
 		<param name="thb_height" type="text" default="160" size="3" label="JW_PLG_SIG_TH" description="JW_PLG_SIG_TH_DESC" />
 		<param name="jpg_quality" type="text" default="80" size="3" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
 	</params>
 	<params group="advanced">
-		<param name="cache_expire_time" type="text" default="1440" size="3" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
+		<param name="cache_expire_time" type="text" default="3600" size="3" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
 		<param name="memoryLimit" type="text" default="" size="3" label="JW_PLG_SIG_ML" description="JW_PLG_SIG_ML_DESC" />
 	</params>
 	<!-- Files -->
@@ -35,9 +33,6 @@
 		<filename plugin="jw_sig">jw_sig.php</filename>
 		<folder>jw_sig</folder>
 	</files>
-	<media folder="plugin/media" destination="jw_sig">
-		<filename>SIG_300x94.png</filename>
-	</media>
 	<languages folder="plugin">
 		<language tag="en-GB">language/en-GB/en-GB.plg_content_jw_sig.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.plg_content_jw_sig.sys.ini</language>

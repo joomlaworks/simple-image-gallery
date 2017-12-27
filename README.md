@@ -1,13 +1,13 @@
 Simple Image Gallery
 ====================
 
-*** New version 3.0.x released, now compatible with Joomla! 1.5 to 3.x ***
+*** New version 3.0.x released, now compatible with Joomla 1.5 to 3.x ***
 
-Adding image galleries inside your Joomla! articles is now super-easy and simple, using the magical "Simple Image Gallery" plugin for Joomla!.
+Adding image galleries inside your Joomla articles is now super-easy and simple, using the magical "Simple Image Gallery" plugin for Joomla.
 
-The plugin can turn any folder of images located inside your Joomla! website into a grid-style image gallery with cool lightbox previews. And all that using a simple plugin tag like {gallery}myphotos{/gallery}.
+The plugin can turn any folder of images located inside your Joomla website into a grid-style image gallery with cool lightbox previews. And all that using a simple plugin tag like {gallery}myphotos{/gallery}.
 
-So for example, if we have a folder called "my_trip_to_Paris" located in images/stories/my_trip_to_Paris, then we can create our gallery by simply entering the tag {gallery}my_trip_to_Paris{/gallery} into some Joomla! article.
+So for example, if we have a folder called "my_trip_to_Paris" located in images/stories/my_trip_to_Paris, then we can create our gallery by simply entering the tag {gallery}my_trip_to_Paris{/gallery} into some Joomla article.
 
 The galleries created are presented in a grid using a polaroid-like background for the thumbnails. When your visitors click on a thumbnail, they see the original image in a lightbox popup. The thumbnails are generated and cached using PHP for better results.
 
@@ -20,7 +20,7 @@ Please note that if you want to create a gallery from a subfolder located inside
 You can see a demo of the plugin here:
 http://demo.joomlaworks.net/simple-image-gallery
 
-Simple Image Gallery is a Joomla! plugin developed by JoomlaWorks, released under the GNU General Public License.
+Simple Image Gallery is a Joomla plugin developed by JoomlaWorks, released under the GNU General Public License.
 
 
 ## LEARN MORE
