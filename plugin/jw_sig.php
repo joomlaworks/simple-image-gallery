@@ -185,9 +185,11 @@ class plgContentJw_sig extends JPlugin
             // start the replace loop
             foreach ($matches[0] as $key => $match) {
                 $tagcontent = preg_replace("/{.+?}/", "", $match);
+                $tagcontent = str_replace(array('"','\'','`'), array('&quot;','&apos;','&#x60;'), $tagcontent); // Address potential XSS attacks
+                $tagcontent = trim(strip_tags($tagcontent));
 
                 if (strpos($tagcontent, ':')!==false) {
-                    $tagparams            = explode(':', $tagcontent);
+                    $tagparams        = explode(':', $tagcontent);
                     $galleryFolder    = $tagparams[0];
                 } else {
                     $galleryFolder    = $tagcontent;
