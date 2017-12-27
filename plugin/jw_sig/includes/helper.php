@@ -14,7 +14,6 @@ class SimpleImageGalleryHelper
 {
     public static function renderGallery($srcimgfolder, $thb_width, $thb_height, $smartResize, $jpg_quality, $cache_expire_time, $gal_id)
     {
-
         // API
         jimport('joomla.filesystem.folder');
 
@@ -165,7 +164,6 @@ class SimpleImageGalleryHelper
     public static function thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize)
     {
         if ($smartResize) {
-
             // thumb ratio bigger that container ratio
             if ($width / $height > $thb_width / $thb_height) {
                 // wide containers
@@ -243,13 +241,13 @@ class SimpleImageGalleryHelper
     // Path overrides
     public static function getTemplatePath($pluginName, $file, $tmpl)
     {
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
         $p = new JObject;
         $pluginGroup = 'content';
 
-        $jTemplate = $mainframe->getTemplate();
+        $jTemplate = $app->getTemplate();
 
-        if ($mainframe->isAdmin()) {
+        if ($app->isAdmin()) {
             $db = JFactory::getDBO();
             if (version_compare(JVERSION, '1.6', 'ge')) {
                 $query = "SELECT template FROM #__template_styles WHERE client_id = 0 AND home = 1";

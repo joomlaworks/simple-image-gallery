@@ -51,7 +51,7 @@ class plgContentJw_sig extends JPlugin
     {
         // API
         jimport('joomla.filesystem.file');
-        $mainframe = JFactory::getApplication();
+        $app = JFactory::getApplication();
         $document  = JFactory::getDocument();
 
         // Assign paths
