@@ -1,9 +1,9 @@
 /**
- * @version		3.5.0
- * @package		Simple Image Gallery (plugin)
- * @author    	JoomlaWorks - http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.
- * @license		GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @version      3.5.0
+ * @package      Simple Image Gallery (plugin)
+ * @author       JoomlaWorks - http://www.joomlaworks.net
+ * @copyright    Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.
+ * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
 var SIGHelper = {
