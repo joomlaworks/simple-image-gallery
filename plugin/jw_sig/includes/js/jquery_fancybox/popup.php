@@ -27,7 +27,7 @@ if(!defined('PE_FANCYBOX_LOADED')){
         (function($) {
             $(document).ready(function() {
                 $('a.fancybox-gallery').fancybox({
-                    buttons : [
+                    buttons: [
                         'slideShow',
                         'fullScreen',
                         'thumbs',
@@ -36,7 +36,7 @@ if(!defined('PE_FANCYBOX_LOADED')){
                         //'zoom',
                         'close'
                     ],
-                    beforeShow : function(instance, current) {
+                    beforeShow: function(instance, current) {
                         if (current.type === 'image') {
                             var title = current.opts.\$orig.attr('title');
                             current.opts.caption = (title.length ? '<b class=\"fancyboxCounter\">".JText::_('JW_PLG_SIG_FB_IMAGE')." ' + (current.index + 1) + ' ".JText::_('JW_PLG_SIG_FB_OF')." ' + instance.group.length + '</b>' + ' | ' + title : '');
