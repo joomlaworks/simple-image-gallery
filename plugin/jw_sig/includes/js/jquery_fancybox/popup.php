@@ -10,8 +10,8 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-$relName = 'fancybox-button';
 $extraClass = 'fancybox-button';
+$customLinkAttributes = 'data-fancybox="gallery'.$gal_id.'"';
 
 $stylesheets = array(
     'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css'
