@@ -25,6 +25,8 @@ So let's briefly see what are the main advantages of using Simple Image Gallery:
 ### COMPATIBILITY & LICENSE
 Simple Image Gallery is PHP5 and PHP7 compatible (as of v3.5.0) and fully compatible with Joomla versions 1.5 to 3.x.
 
+Joomla 1.5 must have the "Mootools Upgrade" system plugin enabled to avoid JavaScript conflicts between Mootools and newer jQuery releases used by the plugin.
+
 Simple Image Gallery is a Joomla plugin developed by JoomlaWorks, released under the GNU General Public License.
 
 ### DEMO
