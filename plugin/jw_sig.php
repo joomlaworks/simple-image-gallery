@@ -232,7 +232,7 @@ class plgContentJw_sig extends JPlugin
 
                     if (count($stylesheets)) {
                         foreach ($stylesheets as $stylesheet) {
-                            if (substr($script, 0, 4) == 'http' || substr($script, 0, 2) == '//') {
+                            if (substr($stylesheet, 0, 4) == 'http' || substr($stylesheet, 0, 2) == '//') {
                                 $document->addStyleSheet($stylesheet);
                             } else {
                                 $document->addStyleSheet($popupPath.'/'.$stylesheet);
