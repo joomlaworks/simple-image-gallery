@@ -312,8 +312,8 @@ class plgContentJw_sig extends JPlugin
                 $plg_html = $getTemplate;
 
                 // Do the replace
-                $row->text = preg_replace("#{".$this->plg_tag."}".$tagcontent."{/".$this->plg_tag."}#s", $plg_html, $row->text);
-            }// end foreach
+                $row->text = preg_replace("#{".$this->plg_tag."}".preg_quote($tagcontent)."{/".$this->plg_tag."}#s", $plg_html, $row->text);
+            } // end foreach
 
             // Global head includes
             if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html') {
