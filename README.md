@@ -1,27 +1,34 @@
 Simple Image Gallery
 ====================
 
-*** New version 3.5.x released, compatible with Joomla versions 1.5 to 3.x ***
+Simple Image Gallery (by JoomlaWorks) is truly the simplest and most effective way to add image galleries into your Joomla content and a classic must-have extension for any Joomla based website.
 
-Adding image galleries inside your Joomla articles is now super-easy and simple, using the magical "Simple Image Gallery" plugin for Joomla.
+### WHY SIMPLE IMAGE GALLERY?
+Adding image galleries inside your Joomla articles, K2 items, Virtuemart/HikaShop products or any other component that supports "content" plugins is dead-simple. The plugin can turn any folder of images located inside your Joomla website into a grid-style image gallery with lightbox/modal previews. And all that using a simple plugin tag like {gallery}myphotos{/gallery} or {gallery}some/folder/myphotos{/gallery}.
 
-The plugin can turn any folder of images located inside your Joomla website into a grid-style image gallery with cool lightbox previews. And all that using a simple plugin tag like {gallery}myphotos{/gallery}.
+So for example, if we have a folder of images called "my_trip_to_Paris" and located in images/my_trip_to_Paris, then we can create our gallery by simply entering the tag {gallery}my_trip_to_Paris{/gallery} into some Joomla article.
 
-So for example, if we have a folder called "my_trip_to_Paris" located in images/stories/my_trip_to_Paris, then we can create our gallery by simply entering the tag {gallery}my_trip_to_Paris{/gallery} into some Joomla article.
+The galleries created are presented in a grid of thumbnails. When your site visitors click on a thumbnail, they see the original (source) image in a lightbox/modal popup. The thumbnails are generated and cached using PHP for better results.
 
-The galleries created are presented in a grid using a polaroid-like background for the thumbnails. When your visitors click on a thumbnail, they see the original image in a lightbox popup. The thumbnails are generated and cached using PHP for better results.
+The plugin is ideal for any type of website: from personal ones (where you'd post a photo gallery from your last summer vacation), to e-shops (for product presentation) to large news portals. With Simple Image Gallery, you can have as many galleries as you want inside your content.
 
-So let's briefly see what are the main advantages of using Simple Image Gallery: a) You don't need to have an additional gallery component to display a few images, b) you don't need to tell your visitors "to see our photos from Paris click here" and c) you focus more on content writing and less on administering the images!
+### FEATURES
+So let's briefly see what are the main advantages of using Simple Image Gallery:
+- You don't need to have an additional gallery component to display a few images and thus you don't need to tell your visitors "to see photos of XYZ click here".
+- You can place one or more image galleries anywhere within your content giving you total layout freedom.
+- The gallery layout is fluid by default which means it'll fit both responsive and adaptive website layouts.
+- You can set a "root folder" in the plugin's parameters if you have all your gallery folders under a single long path in your Joomla site (e.g. images/content/galleries). This way you won't have to type the full path to each gallery folder inside the {gallery}...{/gallery} plugin tags but just the gallery folder name. The default "root folder" in the plugin's parameters is "images" because that's the default folder for uploading media files in Joomla as well.
+- You can use MVC overrides to change how the thumbnail grid looks in your site. Simply copy the folder /plugin/jw_sig/tmpl/Classic into /templates/YOUR_TEMPLATE/html/jw_sig/ so that you can access its files in /templates/YOUR_TEMPLATE/html/jw_sig/Classic/. You can then modify both the HTML and CSS code included there to match your template's design and colors.
+- Uses the core Joomla updater.
+- Uses Fancybox 3 for the lightbox/modal previews.
 
-The plugin is ideal for news portals wanting to display some product images, for example, inside their articles. Or for people who quickly wanna show their summer vacation pictures. With Simple Image Gallery, you can have as many galleries as you want inside each article.
-
-Please note that if you want to create a gallery from a subfolder located inside your "image gallery root folder", simply adjust the plugin syntax to reflect the remaining path (after your set "root folder"), e.g. {gallery}folder/subfolder/othersubfolder{/gallery}. Make sure you write the path to your target folder without any slashes at the beginning or the end of your path.
-
-You can see a demo of the plugin here:
-http://demo.joomlaworks.net/simple-image-gallery
+### COMPATIBILITY & LICENSE
+Simple Image Gallery is PHP5 and PHP7 compatible (as of v3.5.0) and fully compatible with Joomla versions 1.5 to 3.x.
 
 Simple Image Gallery is a Joomla plugin developed by JoomlaWorks, released under the GNU General Public License.
 
+### DEMO
+You can see a demo of the plugin here: http://demo.joomlaworks.net/simple-image-gallery
 
-## LEARN MORE
-Visit the Simple Image Gallery product page at: http://www.joomlaworks.net/simple-image-gallery
+### LEARN MORE
+Visit the Simple Image Gallery product page at: https://www.joomlaworks.net/simple-image-gallery
