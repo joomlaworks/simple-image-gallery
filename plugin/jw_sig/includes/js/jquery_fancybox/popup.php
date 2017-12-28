@@ -10,7 +10,7 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-$extraClass = 'fancybox-button';
+$extraClass = 'fancybox-gallery';
 $customLinkAttributes = 'data-fancybox="gallery'.$gal_id.'"';
 
 $stylesheets = array(
@@ -26,7 +26,7 @@ if(!defined('PE_FANCYBOX_LOADED')){
     $scriptDeclarations = array("
         (function($) {
             $(document).ready(function() {
-                $('a.fancybox-button').fancybox({
+                $('a.fancybox-gallery').fancybox({
                     buttons : [
                         'slideShow',
                         'fullScreen',
