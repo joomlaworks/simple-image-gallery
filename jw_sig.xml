@@ -20,11 +20,11 @@
 			<option value="1.11.3">JW_PLG_SIG_LOAD_V1_11_X_LATEST_COPY</option>
 			<option value="1.12.4">JW_PLG_SIG_LOAD_V1_12_X_LATEST_COPY</option>
 		</param>
-		<param name="thb_width" type="text" default="200" size="3" label="JW_PLG_SIG_TW" description="JW_PLG_SIG_TW_DESC" />
-		<param name="thb_height" type="text" default="160" size="3" label="JW_PLG_SIG_TH" description="JW_PLG_SIG_TH_DESC" />
-		<param name="jpg_quality" type="text" default="80" size="3" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
-		<param name="cache_expire_time" type="text" default="3600" size="3" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
-		<param name="memoryLimit" type="text" default="" size="3" label="JW_PLG_SIG_ML" description="JW_PLG_SIG_ML_DESC" />
+		<param name="thb_width" type="text" default="200" size="6" label="JW_PLG_SIG_TW" description="JW_PLG_SIG_TW_DESC" />
+		<param name="thb_height" type="text" default="160" size="6" label="JW_PLG_SIG_TH" description="JW_PLG_SIG_TH_DESC" />
+		<param name="jpg_quality" type="text" default="80" size="6" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
+		<param name="cache_expire_time" type="text" default="3600" size="6" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
+		<param name="memoryLimit" type="text" default="" size="6" label="JW_PLG_SIG_ML" description="JW_PLG_SIG_ML_DESC" />
 	</params>
 	<!-- Files -->
 	<files folder="plugin" destination="jw_sig">
