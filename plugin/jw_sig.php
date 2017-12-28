@@ -137,7 +137,7 @@ class plgContentJw_sig extends JPlugin
 
         $galleries_rootfolder = ($params->get('galleries_rootfolder')) ? $params->get('galleries_rootfolder') : $pluginParams->get('galleries_rootfolder', $defaultImagePath);
         $popup_engine = 'jquery_fancybox';
-        $jQueryHandling = $pluginParams->get('jQueryHandling', '1.8.3');
+        $jQueryHandling = $pluginParams->get('jQueryHandling', '1.12.4');
         $thb_template = 'Classic';
         $thb_width = (!is_null($params->get('thb_width', null))) ? $params->get('thb_width') : $pluginParams->get('thb_width', 200);
         $thb_height = (!is_null($params->get('thb_height', null))) ? $params->get('thb_height') : $pluginParams->get('thb_height', 160);
