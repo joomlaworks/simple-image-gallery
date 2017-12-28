@@ -30,7 +30,7 @@ if(!defined('PE_FANCYBOX_LOADED')){
                     buttons : [
                         'slideShow',
                         'fullScreen',
-                        //'thumbs',
+                        'thumbs',
                         'share',
                         'download',
                         //'zoom',
