@@ -23,21 +23,29 @@ $scripts = array(
 
 if(!defined('PE_FANCYBOX_LOADED')){
 	define('PE_FANCYBOX_LOADED', true);
-	$scriptDeclarations = array('
+	$scriptDeclarations = array("
 		(function($) {
-			$("a.fancybox-button").fancybox({
-				//padding: 0,
-				//fitToView	: false,
-				helpers		: {
-					title	: { type : \'inside\' }, // options: over, inside, outside, float
-					buttons	: {}
-				},
-				afterLoad : function() {
-					this.title = \'<b class="fancyboxCounter">'.JText::_('JW_PLG_SIG_FB_IMAGE').' \' + (this.index + 1) + \' '.JText::_('JW_PLG_SIG_FB_OF').' \' + this.group.length + \'</b>\' + (this.title ? \' | \' + this.title : \'\');
-				}
+			$(document).ready(function() {
+				$('a.fancybox-button').fancybox({
+					buttons : [
+					    'slideShow',
+					    'fullScreen',
+					    //'thumbs',
+					    'share',
+					    'download',
+					    //'zoom',
+					    'close'
+					],
+					beforeShow : function(instance, current) {
+						if (current.type === 'image') {
+							var title = current.opts.\$orig.attr('title');
+							current.opts.caption = (title.length ? '<b class=\"fancyboxCounter\">".JText::_('JW_PLG_SIG_FB_IMAGE')." ' + (current.index + 1) + ' ".JText::_('JW_PLG_SIG_FB_OF')." ' + instance.group.length + '</b>' + ' | ' + title : '');
+						}
+					}
+				});
 			});
 		})(jQuery);
-	');
+	");
 } else {
 	$scriptDeclarations = array();
 }
