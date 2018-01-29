@@ -26,17 +26,13 @@ ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover img.sigFreeImg {display:bl
 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover img.sigFreeImg {opacity:0.7;}
 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover:after {position:absolute;top:50%;left:50%;margin:-24px 0 0 -24px;display:block;content:"";width:48px;height:48px;background:transparent url(../images/magnify_48x48_24.png) no-repeat;}
 
-/* Popup */
-span.sigFreePopupCaption {font-weight:bold;color:#C63C13;font-size:13px;font-family:Georgia, "Times New Roman", Times, serif;}
-a.sigFreeDownloadLink,a.sigFreeDownloadLink:hover {background:url(../images/disk.png) no-repeat left center;padding:4px 0 4px 20px;}
-div.sigFreeModulePosition {text-align:center;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding:4px;margin:8px 0;background:#ffffdd;}
-
 /* IE specific styling:Use "body.sigFreeIsIEX element {}" - where X is 6, 7 or 8 - to target elements for these browser versions only */
 body.sigFreeIsIE6 {}
 body.sigFreeIsIE7 {}
-body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink,
-body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {float:left;}
+	body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink,
+	body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {float:left;}
 body.sigFreeIsIE8 {}
+body.sigFreeIsIE9 {}
 
 /* Print message shown on ?tmpl=component&print=1 */
 .sigFreePrintMessage {display:none;}

@@ -21,6 +21,7 @@ class plgContentJw_sig extends JPlugin
     // JoomlaWorks reference parameters
     public $plg_name             = "jw_sig";
     public $plg_tag              = "gallery";
+    public $plg_version          = "3.6.0";
     public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.6.0) starts here -->\n";
     public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.6.0) ends here -->\n\n";
 
@@ -292,7 +293,7 @@ class plgContentJw_sig extends JPlugin
 
                     $pluginCSS = SimpleImageGalleryHelper::getTemplatePath($this->plg_name, 'css/template.css', $thb_template);
                     $pluginCSS = $pluginCSS->http;
-                    $document->addStyleSheet($pluginCSS);
+                    $document->addStyleSheet($pluginCSS.'?v='.$this->plg_version);
 
                     // Message to show when printing an article/item with a gallery
                     if ($tmpl == "component" && $print !== false) {
@@ -324,7 +325,7 @@ class plgContentJw_sig extends JPlugin
 
             // Global head includes
             if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html') {
-                $document->addScript($pluginLivePath.'/includes/js/behaviour.js');
+                $document->addScript($pluginLivePath.'/includes/js/behaviour.js?v='.$this->plg_version);
             }
         } // end if
     } // END FUNCTION
