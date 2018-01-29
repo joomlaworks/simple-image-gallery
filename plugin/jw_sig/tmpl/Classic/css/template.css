@@ -1,8 +1,8 @@
 /**
- * @version      3.5.0
+ * @version      3.6.0
  * @package      Simple Image Gallery (plugin)
  * @author       JoomlaWorks - http://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.
+ * @copyright    Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
  * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -38,5 +38,11 @@ body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink,
 body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {float:left;}
 body.sigFreeIsIE8 {}
 
-/* Print message */
+/* Print message shown on ?tmpl=component&print=1 */
 .sigFreePrintMessage {display:none;}
+
+/* Print CSS rules used to hide galleries on page print outs and display URL */
+@media print {
+	.sigFreeContainer {display:none;}
+	.sigFreePrintMessage {display:block;color:#999;font-size:14px;padding:8px 0;}
+}

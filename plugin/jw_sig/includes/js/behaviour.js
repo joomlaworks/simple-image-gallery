@@ -1,25 +1,19 @@
 /**
- * @version      3.5.0
+ * @version      3.6.0
  * @package      Simple Image Gallery (plugin)
  * @author       JoomlaWorks - http://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.
+ * @copyright    Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
  * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
 var SIGHelper = {
     ieBrowserDetect: function() {
-        if (!document.getElementsByTagName) return false;
-        if (!document.getElementById) return false;
-
-        var bodyClass = document.getElementsByTagName("body")[0].className;
-
-        var isIE6 = navigator.userAgent.toLowerCase().indexOf('msie 6') != -1;
-        var isIE7 = navigator.userAgent.toLowerCase().indexOf('msie 7') != -1;
-        var isIE8 = navigator.userAgent.toLowerCase().indexOf('msie 8') != -1;
-
-        if (isIE6) document.getElementsByTagName("body")[0].className = bodyClass + ' sigFreeIsIE6';
-        if (isIE7) document.getElementsByTagName("body")[0].className = bodyClass + ' sigFreeIsIE7';
-        if (isIE8) document.getElementsByTagName("body")[0].className = bodyClass + ' sigFreeIsIE8';
+        var IEVersions = [6, 7, 8, 9];
+        for (var i = 0; i < IEVersions.length; i++) {
+            if (navigator.userAgent.toLowerCase().indexOf('msie ' + IEVersions[i]) != -1) {
+                document.getElementsByTagName("body")[0].className += ' sigFreeIsIE' + IEVersions[i];
+            }
+        }
     },
     loader: function(func) {
         var oldonload = window.onload;
@@ -36,5 +30,4 @@ var SIGHelper = {
     }
 };
 
-// Initiate
 SIGHelper.loader(SIGHelper.ieBrowserDetect);

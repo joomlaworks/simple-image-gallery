@@ -1,9 +1,9 @@
 <?php
 /**
- * @version      3.5.0
+ * @version      3.6.0
  * @package      Simple Image Gallery (plugin)
  * @author       JoomlaWorks - http://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2017 JoomlaWorks Ltd. All rights reserved.
+ * @copyright    Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
  * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -21,8 +21,8 @@ class plgContentJw_sig extends JPlugin
     // JoomlaWorks reference parameters
     public $plg_name             = "jw_sig";
     public $plg_tag              = "gallery";
-    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.5.0) starts here -->\n";
-    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.5.0) ends here -->\n\n";
+    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.6.0) starts here -->\n";
+    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.6.0) ends here -->\n\n";
 
     public function __construct(&$subject, $params)
     {
@@ -53,6 +53,9 @@ class plgContentJw_sig extends JPlugin
         jimport('joomla.filesystem.file');
         $app = JFactory::getApplication();
         $document  = JFactory::getDocument();
+
+        $tmpl = JRequest::getCmd('tmpl');
+        $print = JRequest::getCmd('print');
 
         // Assign paths
         $sitePath = JPATH_SITE;
@@ -161,7 +164,7 @@ class plgContentJw_sig extends JPlugin
         }
 
         // Includes
-        require_once(dirname(__FILE__).'/'.$this->plg_name.'/includes/helper.php');
+        require_once dirname(__FILE__).'/'.$this->plg_name.'/includes/helper.php';
 
         // Other assignments
         $transparent = $pluginLivePath.'/includes/images/transparent.gif';
@@ -207,6 +210,9 @@ class plgContentJw_sig extends JPlugin
                     continue;
                 }
 
+                // Hide print message on non-print pages
+                $itemPrintURL = false;
+
                 // CSS & JS includes: Append head includes, but not when we're outputing raw content (like in K2)
                 if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html') {
 
@@ -221,7 +227,7 @@ class plgContentJw_sig extends JPlugin
                     $popupRequire = dirname(__FILE__).'/'.$this->plg_name.'/includes/js/'.$popup_engine.'/popup.php';
 
                     if (file_exists($popupRequire) && is_readable($popupRequire)) {
-                        require($popupRequire);
+                        require $popupRequire;
                     }
 
                     if (version_compare(JVERSION, '1.6.0', 'ge')) {
@@ -286,25 +292,26 @@ class plgContentJw_sig extends JPlugin
 
                     $pluginCSS = SimpleImageGalleryHelper::getTemplatePath($this->plg_name, 'css/template.css', $thb_template);
                     $pluginCSS = $pluginCSS->http;
-                    $document->addStyleSheet($pluginCSS, 'text/css', 'screen');
-
-                    // Print CSS
-                    $document->addStyleSheet($pluginLivePath.'/includes/css/print.css', 'text/css', 'print');
+                    $document->addStyleSheet($pluginCSS);
 
                     // Message to show when printing an article/item with a gallery
-                    $websiteURL = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https://".$_SERVER['HTTP_HOST'] : "http://".$_SERVER['HTTP_HOST'];
-                    $itemPrintURL = $websiteURL.$_SERVER['REQUEST_URI'];
-                    $itemPrintURL = explode("#", $itemPrintURL);
-                    $itemPrintURL = $itemPrintURL[0].'#sigFreeId'.$gal_id;
-                } else {
-                    $itemPrintURL = false;
+                    if ($tmpl == "component" && $print !== false) {
+                        $uri = JURI::getInstance();
+                        $getCurrentURL = $uri->_uri;
+                        if (strpos($getCurrentURL, "#") !== false) {
+                            $itemPrintURL = explode("#", $getCurrentURL);
+                            $itemPrintURL = $itemPrintURL[0].'#sigFreeId'.$gal_id;
+                        } else {
+                            $itemPrintURL = $getCurrentURL.'#sigFreeId'.$gal_id;
+                        }
+                    }
                 }
 
                 // Fetch the template
                 ob_start();
                 $templatePath = SimpleImageGalleryHelper::getTemplatePath($this->plg_name, 'default.php', $thb_template);
                 $templatePath = $templatePath->file;
-                include($templatePath);
+                include $templatePath;
                 $getTemplate = $this->plg_copyrights_start.ob_get_contents().$this->plg_copyrights_end;
                 ob_end_clean();
 
