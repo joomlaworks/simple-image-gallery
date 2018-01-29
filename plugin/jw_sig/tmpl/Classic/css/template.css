@@ -13,7 +13,7 @@ li.sigFreeClear {clear:both;float:none!important;height:0!important;line-height:
 
 /* Container */
 ul.sigFreeClassic {margin:8px auto!important;padding:8px 0!important;list-style:none;clear:both;overflow:hidden;}
-	ul.sigFreeClassic.singleThumbGallery {margin:0!important;padding:8px 0!important;list-style:none!important;float:left;}
+    ul.sigFreeClassic.singleThumbGallery {margin:0!important;padding:8px 0!important;list-style:none!important;float:left;}
 
 /* Thumbnail */
 ul.sigFreeClassic li.sigFreeThumb {float:left;background:#fff!important;margin:0 1px 1px 0;padding:0;list-style:none!important;}
@@ -29,16 +29,17 @@ ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover:after {position:absolute;t
 /* IE specific styling:Use "body.sigFreeIsIEX element {}" - where X is 6, 7 or 8 - to target elements for these browser versions only */
 body.sigFreeIsIE6 {}
 body.sigFreeIsIE7 {}
-	body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink,
-	body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {float:left;}
+    body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink,
+    body.sigFreeIsIE7 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {float:left;}
 body.sigFreeIsIE8 {}
 body.sigFreeIsIE9 {}
 
 /* Print message shown on ?tmpl=component&print=1 */
-.sigFreePrintMessage {display:none;}
+.sigFreePrintOutput {display:none;}
 
 /* Print CSS rules used to hide galleries on page print outs and display URL */
 @media print {
-	.sigFreeContainer {display:none;}
-	.sigFreePrintMessage {display:block;color:#999;font-size:14px;padding:8px 0;}
+    .sigFreeContainer {display:none;}
+    .sigFreePrintOutput {display:block;color:#999;font-size:14px;padding:8px 0;}
+        .sigFreePrintOutput img {width:33%;height:auto;vertical-align:top;}
 }

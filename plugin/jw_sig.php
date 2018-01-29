@@ -211,9 +211,6 @@ class plgContentJw_sig extends JPlugin
                     continue;
                 }
 
-                // Hide print message on non-print pages
-                $itemPrintURL = false;
-
                 // CSS & JS includes: Append head includes, but not when we're outputing raw content (like in K2)
                 if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html') {
 
@@ -294,19 +291,10 @@ class plgContentJw_sig extends JPlugin
                     $pluginCSS = SimpleImageGalleryHelper::getTemplatePath($this->plg_name, 'css/template.css', $thb_template);
                     $pluginCSS = $pluginCSS->http;
                     $document->addStyleSheet($pluginCSS.'?v='.$this->plg_version);
-
-                    // Message to show when printing an article/item with a gallery
-                    if ($tmpl == "component" && $print !== false) {
-                        $uri = JURI::getInstance();
-                        $getCurrentURL = $uri->_uri;
-                        if (strpos($getCurrentURL, "#") !== false) {
-                            $itemPrintURL = explode("#", $getCurrentURL);
-                            $itemPrintURL = $itemPrintURL[0].'#sigFreeId'.$gal_id;
-                        } else {
-                            $itemPrintURL = $getCurrentURL.'#sigFreeId'.$gal_id;
-                        }
-                    }
                 }
+
+                // Print output
+                $isPrintPage = ($tmpl == "component" && $print !== false) ? true : false;
 
                 // Fetch the template
                 ob_start();
