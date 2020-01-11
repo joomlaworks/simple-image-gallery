@@ -16,8 +16,10 @@ class SimpleImageGalleryHelper
     {
         // API
         jimport('joomla.filesystem.folder');
+        $app = JFactory::getApplication();
 
         if (version_compare(JVERSION, '4', 'ge')) {
+            $jinput = $app->input;
             $format = $jinput->getCmd('format');
         } else {
             $format = JRequest::getCmd('format');
@@ -302,4 +304,4 @@ class SimpleImageGalleryHelper
         $replacement_html = array('_', '_');
         return str_replace($source_html, $replacement_html, $text_to_parse);
     }
-} // End class
+}
