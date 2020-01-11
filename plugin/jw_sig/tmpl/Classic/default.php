@@ -1,10 +1,10 @@
 <?php
 /**
- * @version      3.6.0
+ * @version      4.0.0
  * @package      Simple Image Gallery (plugin)
- * @author       JoomlaWorks - http://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
- * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @author       JoomlaWorks - https://www.joomlaworks.net
+ * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
+ * @license      GNU/GPL license: https://www.gnu.org/licenses/gpl.html
  */
 
 // no direct access

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version      3.6.0
+ * @version      4.0.0
  * @package      Simple Image Gallery (plugin)
- * @author       JoomlaWorks - http://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
- * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @author       JoomlaWorks - https://www.joomlaworks.net
+ * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
+ * @license      GNU/GPL license: https://www.gnu.org/licenses/gpl.html
  */
 
 // no direct access
@@ -17,9 +17,15 @@ class SimpleImageGalleryHelper
         // API
         jimport('joomla.filesystem.folder');
 
+        if (version_compare(JVERSION, '4', 'ge')) {
+            $format = $jinput->getCmd('format');
+        } else {
+            $format = JRequest::getCmd('format');
+        }
+
         // Path assignment
         $sitePath = JPATH_SITE.'/';
-        if (JRequest::getCmd('format')=='feed') {
+        if ($format == 'feed') {
             $siteUrl = JURI::root(true).'';
         } else {
             $siteUrl = JURI::root(true).'/';
@@ -161,7 +167,7 @@ class SimpleImageGalleryHelper
     /* ------------------ Helper Functions ------------------ */
 
     // Calculate thumbnail dimensions
-    public static function thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize)
+    private static function thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize)
     {
         if ($smartResize) {
             // thumb ratio bigger that container ratio
@@ -247,9 +253,15 @@ class SimpleImageGalleryHelper
 
         $jTemplate = $app->getTemplate();
 
-        if ($app->isAdmin()) {
+        if (version_compare(JVERSION, '4', 'ge')) {
+            $isAdmin = $app->isClient('administrator');
+        } else {
+            $isAdmin = $app->isAdmin();
+        }
+
+        if ($isAdmin) {
             $db = JFactory::getDBO();
-            if (version_compare(JVERSION, '1.6', 'ge')) {
+            if (version_compare(JVERSION, '2.5.0', 'ge')) {
                 $query = "SELECT template FROM #__template_styles WHERE client_id = 0 AND home = 1";
             } else {
                 $query = "SELECT template FROM #__templates_menu WHERE client_id = 0 AND menuid = 0";
@@ -262,7 +274,7 @@ class SimpleImageGalleryHelper
             $p->file = JPATH_SITE.'/templates/'.$jTemplate.'/html/'.$pluginName.'/'.$tmpl.'/'.$file;
             $p->http = JURI::root(true)."/templates/".$jTemplate."/html/{$pluginName}/{$tmpl}/{$file}";
         } else {
-            if (version_compare(JVERSION, '1.6.0', 'ge')) {
+            if (version_compare(JVERSION, '2.5.0', 'ge')) {
                 // Joomla 1.6+
                 $p->file = JPATH_SITE.'/plugins/'.$pluginGroup.'/'.$pluginName.'/'.$pluginName.'/tmpl/'.$tmpl.'/'.$file;
                 $p->http = JURI::root(true)."/plugins/{$pluginGroup}/{$pluginName}/{$pluginName}/tmpl/{$tmpl}/{$file}";
@@ -276,7 +288,7 @@ class SimpleImageGalleryHelper
     }
 
     // Replace white space
-    public static function replaceWhiteSpace($text_to_parse)
+    private static function replaceWhiteSpace($text_to_parse)
     {
         $source_html = array(" ");
         $replacement_html = array("%20");
@@ -284,7 +296,7 @@ class SimpleImageGalleryHelper
     }
 
     // Cleanup thumbnail filenames
-    public static function cleanThumbName($text_to_parse)
+    private static function cleanThumbName($text_to_parse)
     {
         $source_html = array(' ', ',');
         $replacement_html = array('_', '_');

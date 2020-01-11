@@ -1,10 +1,10 @@
 <?php
 /**
- * @version      3.6.0
+ * @version      4.0.0
  * @package      Simple Image Gallery (plugin)
- * @author       JoomlaWorks - http://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
- * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @author       JoomlaWorks - https://www.joomlaworks.net
+ * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
+ * @license      GNU/GPL license: https://www.gnu.org/licenses/gpl.html
  */
 
 // no direct access
@@ -14,11 +14,11 @@ $extraClass = 'fancybox-gallery';
 $customLinkAttributes = 'data-fancybox="gallery'.$gal_id.'"';
 
 $stylesheets = array(
-    'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css'
+    'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css'
 );
 $stylesheetDeclarations = array();
 $scripts = array(
-    'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js'
+    'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js'
 );
 
 if(!defined('PE_FANCYBOX_LOADED')){

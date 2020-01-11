@@ -21,17 +21,17 @@ So let's briefly see what are the main advantages of using Simple Image Gallery:
 - You can use MVC overrides to change how the thumbnail grid looks in your site. Simply copy the folder /plugin/jw_sig/tmpl/Classic into /templates/YOUR_TEMPLATE/html/jw_sig/ so that you can access its files in /templates/YOUR_TEMPLATE/html/jw_sig/Classic/. You can then modify both the HTML and CSS code included there to match your template's design and colors.
 - Uses the core Joomla updater.
 - Uses Fancybox 3 for the lightbox/modal previews.
-- Allows printing the image gallery grid (as of v3.6.0) when using the print preview feature available in most Joomla components (including the default article system and K2).
+- Allows printing the image gallery grid when using the print preview feature available in most Joomla components (including the default article system and K2).
 
 ### COMPATIBILITY & LICENSE
-Simple Image Gallery is PHP5 and PHP7 compatible (as of v3.5.0) and fully compatible with Joomla versions 1.5 to 3.x.
+Simple Image Gallery is PHP5 and PHP7 compatible and fully compatible with Joomla versions 1.5, 2.5, 3.x and 4.x.
 
 Joomla 1.5 must have the "Mootools Upgrade" system plugin enabled to avoid JavaScript conflicts between Mootools and newer jQuery releases used by the plugin.
 
 Simple Image Gallery is a Joomla plugin developed by JoomlaWorks, released under the GNU General Public License.
 
 ### DEMO
-You can see a demo of the plugin here: http://demo.joomlaworks.net/simple-image-gallery
+You can see a demo of the plugin here: https://demo.joomlaworks.net/simple-image-gallery
 
 ### LEARN MORE
 Visit the Simple Image Gallery product page at: https://www.joomlaworks.net/simple-image-gallery

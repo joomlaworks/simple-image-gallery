@@ -1,17 +1,17 @@
 <?php
 /**
- * @version      3.6.0
+ * @version      4.0.0
  * @package      Simple Image Gallery (plugin)
- * @author       JoomlaWorks - http://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
- * @license      GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @author       JoomlaWorks - https://www.joomlaworks.net
+ * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
+ * @license      GNU/GPL license: https://www.gnu.org/licenses/gpl.html
  */
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.plugin.plugin');
-if (version_compare(JVERSION, '1.6.0', 'ge')) {
+if (version_compare(JVERSION, '2.5.0', 'ge')) {
     jimport('joomla.html.parameter');
 }
 
@@ -21,9 +21,9 @@ class plgContentJw_sig extends JPlugin
     // JoomlaWorks reference parameters
     public $plg_name             = "jw_sig";
     public $plg_tag              = "gallery";
-    public $plg_version          = "3.6.0";
-    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.6.0) starts here -->\n";
-    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v3.6.0) ends here -->\n\n";
+    public $plg_version          = "4.0.0";
+    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.0.0) starts here -->\n";
+    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.0.0) ends here -->\n\n";
 
     public function __construct(&$subject, $params)
     {
@@ -53,15 +53,30 @@ class plgContentJw_sig extends JPlugin
         // API
         jimport('joomla.filesystem.file');
         $app = JFactory::getApplication();
-        $document  = JFactory::getDocument();
+        $document = JFactory::getDocument();
 
-        $tmpl = JRequest::getCmd('tmpl');
-        $print = JRequest::getCmd('print');
+        if (version_compare(JVERSION, '4', 'ge')) {
+            if ($app->isClient('administrator')) {
+                return;
+            }
+            $jinput = $app->input;
+            $tmpl = $jinput->getCmd('tmpl');
+            $print = $jinput->getCmd('print');
+            $format = $jinput->getCmd('format');
+        } else {
+            if ($app->isAdmin()) {
+                return;
+            }
+            $tmpl = JRequest::getCmd('tmpl');
+            $print = JRequest::getCmd('print');
+            $format = JRequest::getCmd('format');
+        }
 
         // Assign paths
         $sitePath = JPATH_SITE;
         $siteUrl  = JURI::root(true);
-        if (version_compare(JVERSION, '1.6.0', 'ge')) {
+
+        if (version_compare(JVERSION, '2.5.0', 'ge')) {
             $pluginLivePath = $siteUrl.'/plugins/content/'.$this->plg_name.'/'.$this->plg_name;
             $defaultImagePath = 'images';
         } else {
@@ -76,12 +91,12 @@ class plgContentJw_sig extends JPlugin
 
         // Bail out if the page format is not what we want
         $allowedFormats = array('', 'html', 'feed', 'json');
-        if (!in_array(JRequest::getCmd('format'), $allowedFormats)) {
+        if (!in_array($format, $allowedFormats)) {
             return;
         }
 
         // Simple performance check to determine whether plugin should process further
-        if (JString::strpos($row->text, $this->plg_tag) === false) {
+        if (strpos($row->text, $this->plg_tag) === false) {
             return;
         }
 
@@ -176,7 +191,7 @@ class plgContentJw_sig extends JPlugin
         }
 
         // Variable cleanups for K2
-        if (JRequest::getCmd('format') == 'raw') {
+        if ($format == 'raw') {
             $this->plg_copyrights_start = '';
             $this->plg_copyrights_end = '';
         }
@@ -212,7 +227,7 @@ class plgContentJw_sig extends JPlugin
                 }
 
                 // CSS & JS includes: Append head includes, but not when we're outputing raw content (like in K2)
-                if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html') {
+                if ($format == '' || $format == 'html') {
 
                     // Initiate variables
                     $relName = '';
@@ -228,7 +243,9 @@ class plgContentJw_sig extends JPlugin
                         require $popupRequire;
                     }
 
-                    if (version_compare(JVERSION, '1.6.0', 'ge')) {
+                    if (version_compare(JVERSION, '4', 'ge')) {
+                        JHtml::_('jquery.framework');
+                    } elseif (version_compare(JVERSION, '2.5.0', 'ge')) {
                         JHtml::_('behavior.framework');
                     } else {
                         JHTML::_('behavior.mootools');
@@ -309,12 +326,7 @@ class plgContentJw_sig extends JPlugin
 
                 // Do the replace
                 $row->text = preg_replace("#{".$this->plg_tag."}".preg_quote($tagcontent)."{/".$this->plg_tag."}#s", $plg_html, $row->text);
-            } // end foreach
-
-            // Global head includes
-            if (JRequest::getCmd('format') == '' || JRequest::getCmd('format') == 'html') {
-                $document->addScript($pluginLivePath.'/includes/js/behaviour.js?v='.$this->plg_version);
             }
-        } // end if
-    } // END FUNCTION
-} // END CLASS
+        }
+    }
+}
