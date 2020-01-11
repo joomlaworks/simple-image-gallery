@@ -26,6 +26,20 @@ if(!defined('PE_FANCYBOX_LOADED')){
     $scriptDeclarations = array("
         (function($) {
             $(document).ready(function() {
+                $.fancybox.defaults.i18n.en = {
+                    CLOSE: '".JText::_('JW_PLG_SIG_FB_CLOSE')."',
+                    NEXT: '".JText::_('JW_PLG_SIG_FB_NEXT')."',
+                    PREV: '".JText::_('JW_PLG_SIG_FB_PREVIOUS')."',
+                    ERROR: '".JText::_('JW_PLG_SIG_FB_REQUEST_CANNOT_BE_LOADED')."',
+                    PLAY_START: '".JText::_('JW_PLG_SIG_FB_START_SLIDESHOW')."',
+                    PLAY_STOP: '".JText::_('JW_PLG_SIG_FB_PAUSE_SLIDESHOW')."',
+                    FULL_SCREEN: '".JText::_('JW_PLG_SIG_FB_FULL_SCREEN')."',
+                    THUMBS: '".JText::_('JW_PLG_SIG_FB_THUMBS')."',
+                    DOWNLOAD: '".JText::_('JW_PLG_SIG_FB_DOWNLOAD')."',
+                    SHARE: '".JText::_('JW_PLG_SIG_FB_SHARE')."',
+                    ZOOM: '".JText::_('JW_PLG_SIG_FB_ZOOM')."'
+                };
+                $.fancybox.defaults.lang = 'en';
                 $('a.fancybox-gallery').fancybox({
                     buttons: [
                         'slideShow',
