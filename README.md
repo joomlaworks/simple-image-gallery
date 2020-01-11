@@ -24,7 +24,7 @@ So let's briefly see what are the main advantages of using Simple Image Gallery:
 - Allows printing the image gallery grid when using the print preview feature available in most Joomla components (including the default article system and K2).
 
 ### COMPATIBILITY & LICENSE
-Simple Image Gallery is PHP5 and PHP7 compatible and fully compatible with Joomla versions 1.5, 2.5, 3.x and 4.x.
+Simple Image Gallery is PHP5 and PHP7 compatible and fully compatible with Joomla versions 1.5, 2.5, 3.x and the upcoming 4.x.
 
 Joomla 1.5 must have the "Mootools Upgrade" system plugin enabled to avoid JavaScript conflicts between Mootools and newer jQuery releases used by the plugin.
 
