@@ -1,6 +1,6 @@
 <?php
 /**
- * @version      4.0.0
+ * @version      4.1.0
  * @package      Simple Image Gallery (plugin)
  * @author       JoomlaWorks - https://www.joomlaworks.net
  * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
@@ -21,9 +21,9 @@ class plgContentJw_sig extends JPlugin
     // JoomlaWorks reference parameters
     public $plg_name             = "jw_sig";
     public $plg_tag              = "gallery";
-    public $plg_version          = "4.0.0";
-    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.0.0) starts here -->\n";
-    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.0.0) ends here -->\n\n";
+    public $plg_version          = "4.1.0";
+    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.1.0) starts here -->\n";
+    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.1.0) ends here -->\n\n";
 
     public function __construct(&$subject, $params)
     {
@@ -219,7 +219,18 @@ class plgContentJw_sig extends JPlugin
                 $gal_id = substr(md5($key.$srcimgfolder), 1, 10);
 
                 // Render the gallery
-                $gallery = SimpleImageGalleryHelper::renderGallery($srcimgfolder, $thb_width, $thb_height, $smartResize, $jpg_quality, $cache_expire_time, $gal_id);
+                $SIGHelper = new SimpleImageGalleryHelper();
+
+                $SIGHelper->srcimgfolder = $srcimgfolder;
+                $SIGHelper->thb_width = $thb_width;
+                $SIGHelper->thb_height = $thb_height;
+                $SIGHelper->smartResize = $smartResize;
+                $SIGHelper->jpg_quality = $jpg_quality;
+                $SIGHelper->cache_expire_time = $cache_expire_time;
+                $SIGHelper->gal_id = $gal_id;
+                $SIGHelper->format = $format;
+
+                $gallery = $SIGHelper->renderGallery();
 
                 if (!$gallery) {
                     JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_03').' '.$srcimgfolder);
@@ -229,7 +240,7 @@ class plgContentJw_sig extends JPlugin
                 // CSS & JS includes: Append head includes, but not when we're outputing raw content (like in K2)
                 if ($format == '' || $format == 'html') {
 
-                    // Initiate variables
+                    // Initialize variables
                     $relName = '';
                     $extraClass = '';
                     $extraWrapperClass = '';
@@ -244,7 +255,7 @@ class plgContentJw_sig extends JPlugin
                     }
 
                     if (version_compare(JVERSION, '4', 'ge')) {
-                        JHtml::_('jquery.framework');
+                        // Do nothing
                     } elseif (version_compare(JVERSION, '2.5.0', 'ge')) {
                         JHtml::_('behavior.framework');
                     } else {
@@ -267,7 +278,7 @@ class plgContentJw_sig extends JPlugin
                     }
 
                     if (strpos($popup_engine, 'jquery_') !== false && $jQueryHandling != 0) {
-                        if (version_compare(JVERSION, '3.0', 'ge')!==false) {
+                        if (version_compare(JVERSION, '3.0', 'ge')) {
                             JHtml::_('jquery.framework');
                         } else {
                             $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/'.$jQueryHandling.'/jquery.min.js');
@@ -305,7 +316,7 @@ class plgContentJw_sig extends JPlugin
                         $customLinkAttributes = ' '.$customLinkAttributes;
                     }
 
-                    $pluginCSS = SimpleImageGalleryHelper::getTemplatePath($this->plg_name, 'css/template.css', $thb_template);
+                    $pluginCSS = $SIGHelper->getTemplatePath($this->plg_name, 'css/template.css', $thb_template);
                     $pluginCSS = $pluginCSS->http;
                     $document->addStyleSheet($pluginCSS.'?v='.$this->plg_version);
                 }
@@ -315,7 +326,7 @@ class plgContentJw_sig extends JPlugin
 
                 // Fetch the template
                 ob_start();
-                $templatePath = SimpleImageGalleryHelper::getTemplatePath($this->plg_name, 'default.php', $thb_template);
+                $templatePath = $SIGHelper->getTemplatePath($this->plg_name, 'default.php', $thb_template);
                 $templatePath = $templatePath->file;
                 include $templatePath;
                 $getTemplate = $this->plg_copyrights_start.ob_get_contents().$this->plg_copyrights_end;

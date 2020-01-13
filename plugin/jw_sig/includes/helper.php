@@ -1,6 +1,6 @@
 <?php
 /**
- * @version      4.0.0
+ * @version      4.1.0
  * @package      Simple Image Gallery (plugin)
  * @author       JoomlaWorks - https://www.joomlaworks.net
  * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
@@ -12,18 +12,29 @@ defined('_JEXEC') or die('Restricted access');
 
 class SimpleImageGalleryHelper
 {
-    public static function renderGallery($srcimgfolder, $thb_width, $thb_height, $smartResize, $jpg_quality, $cache_expire_time, $gal_id)
+    public $srcimgfolder;
+    public $thb_width;
+    public $thb_height;
+    public $smartResize;
+    public $jpg_quality;
+    public $cache_expire_time;
+    public $gal_id;
+    public $format;
+
+    public function renderGallery()
     {
+        // Initialize
+        $srcimgfolder = $this->srcimgfolder;
+        $thb_width = $this->thb_width;
+        $thb_height = $this->thb_height;
+        $smartResize = $this->smartResize;
+        $jpg_quality = $this->jpg_quality;
+        $cache_expire_time = $this->cache_expire_time;
+        $gal_id = $this->gal_id;
+        $format = $this->format;
+
         // API
         jimport('joomla.filesystem.folder');
-        $app = JFactory::getApplication();
-
-        if (version_compare(JVERSION, '4', 'ge')) {
-            $jinput = $app->input;
-            $format = $jinput->getCmd('format');
-        } else {
-            $format = JRequest::getCmd('format');
-        }
 
         // Path assignment
         $sitePath = JPATH_SITE.'/';
@@ -53,9 +64,11 @@ class SimpleImageGalleryHelper
         }
 
         // Loop through the source folder for images
-        $fileTypes = array('jpg', 'jpeg', 'gif', 'png');
+        $fileTypes = array('gif', 'jpg', 'jpeg', 'png', 'webp');
+
         // Create an array of file types
         $found = array();
+
         // Create an array for matching files
         foreach ($srcFolder as $srcImage) {
             $fileInfo = pathinfo($srcImage);
@@ -79,9 +92,9 @@ class SimpleImageGalleryHelper
         foreach ($found as $key => $filename) {
 
             // Determine thumb image filename
-            if (strtolower(substr($filename, -4, 4)) == 'jpeg') {
+            if (strtolower(substr($filename, -4, 4)) == 'jpeg' || strtolower(substr($filename, -4, 4)) == 'webp') {
                 $thumbfilename = substr($filename, 0, -4).'jpg';
-            } elseif (strtolower(substr($filename, -3, 3)) == 'gif' || strtolower(substr($filename, -3, 3)) == 'png' || strtolower(substr($filename, -3, 3)) == 'jpg') {
+            } elseif (strtolower(substr($filename, -3, 3)) == 'gif' || strtolower(substr($filename, -3, 3)) == 'jpg' || strtolower(substr($filename, -3, 3)) == 'png') {
                 $thumbfilename = substr($filename, 0, -3).'jpg';
             }
 
@@ -92,30 +105,37 @@ class SimpleImageGalleryHelper
             $original = $sitePath.$srcimgfolder.'/'.$filename;
 
             // Check if thumb image exists already
-            $thumbimage = $cacheFolderPath.'/'.$prefix.$gal_id.'_'.strtolower(self::cleanThumbName($thumbfilename));
+            $thumbimage = $cacheFolderPath.'/'.$prefix.$gal_id.'_'.strtolower($this->cleanThumbName($thumbfilename));
 
             if (file_exists($thumbimage) && is_readable($thumbimage) && (filemtime($thumbimage) + $cache_expire_time) > time()) {
-                // do nothing
+                // Do nothing
             } else {
                 // Otherwise create the thumb image
 
-                // begin by getting the details of the original
+                // Begin by getting the details of the original
                 list($width, $height, $type) = getimagesize($original);
 
-                // create an image resource for the original
+                // Create an image resource for the original
                 switch ($type) {
                     case 1:
-                        $source = @ imagecreatefromgif($original);
-                        if (!$source) {
-                            JError::raiseNotice('', JText::_('JW_PLG_SIG_ERROR_GIFS'));
-                            return;
-                        }
+                        // GIF
+                        $source = imagecreatefromgif($original);
                         break;
                     case 2:
+                        // JPEG
                         $source = imagecreatefromjpeg($original);
                         break;
                     case 3:
+                        // PNG
                         $source = imagecreatefrompng($original);
+                        break;
+                    case 18:
+                        // WEBP
+                        if (version_compare(PHP_VERSION, '7.1.0', 'ge')) {
+                            $source = imagecreatefromwebp($original);
+                        } else {
+                            $source = null;
+                        }
                         break;
                     default:
                         $source = null;
@@ -127,19 +147,19 @@ class SimpleImageGalleryHelper
                     return;
                 }
 
-                // calculate thumbnails
-                $thumbnail = self::thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize);
+                // Calculate thumbnails
+                $thumbnail = $this->thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize);
 
                 $thumb_width = $thumbnail['width'];
                 $thumb_height = $thumbnail['height'];
 
-                // create an image resource for the thumbnail
+                // Create an image resource for the thumbnail
                 $thumb = imagecreatetruecolor($thumb_width, $thumb_height);
 
-                // create the resized copy
+                // Create the resized copy
                 imagecopyresampled($thumb, $source, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height);
 
-                // convert and save all thumbs to .jpg
+                // Convert and save all thumbs to .jpg
                 $success = imagejpeg($thumb, $thumbimage, $jpg_quality);
 
                 // Bail out if there is a problem in the GD conversion
@@ -147,20 +167,19 @@ class SimpleImageGalleryHelper
                     return;
                 }
 
-                // remove the image resources from memory
+                // Remove the image resources from memory
                 imagedestroy($source);
                 imagedestroy($thumb);
             }
 
             // Assemble the image elements
             $gallery[$key]->filename = $filename;
-            $gallery[$key]->sourceImageFilePath = $siteUrl.$srcimgfolder.'/'.self::replaceWhiteSpace($filename);
-            $gallery[$key]->thumbImageFilePath = $siteUrl.'cache/jw_sig/'.$prefix.$gal_id.'_'.strtolower(self::cleanThumbName($thumbfilename));
+            $gallery[$key]->sourceImageFilePath = $siteUrl.$srcimgfolder.'/'.$this->replaceWhiteSpace($filename);
+            $gallery[$key]->thumbImageFilePath = $siteUrl.'cache/jw_sig/'.$prefix.$gal_id.'_'.strtolower($this->cleanThumbName($thumbfilename));
             $gallery[$key]->width = $thb_width;
             $gallery[$key]->height = $thb_height;
-        }// foreach loop
+        }
 
-        // OUTPUT
         return $gallery;
     }
 
@@ -169,7 +188,7 @@ class SimpleImageGalleryHelper
     /* ------------------ Helper Functions ------------------ */
 
     // Calculate thumbnail dimensions
-    private static function thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize)
+    private function thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize)
     {
         if ($smartResize) {
             // thumb ratio bigger that container ratio
@@ -246,51 +265,8 @@ class SimpleImageGalleryHelper
         return $thumbnail;
     }
 
-    // Path overrides
-    public static function getTemplatePath($pluginName, $file, $tmpl)
-    {
-        $app = JFactory::getApplication();
-        $p = new JObject;
-        $pluginGroup = 'content';
-
-        $jTemplate = $app->getTemplate();
-
-        if (version_compare(JVERSION, '4', 'ge')) {
-            $isAdmin = $app->isClient('administrator');
-        } else {
-            $isAdmin = $app->isAdmin();
-        }
-
-        if ($isAdmin) {
-            $db = JFactory::getDBO();
-            if (version_compare(JVERSION, '2.5.0', 'ge')) {
-                $query = "SELECT template FROM #__template_styles WHERE client_id = 0 AND home = 1";
-            } else {
-                $query = "SELECT template FROM #__templates_menu WHERE client_id = 0 AND menuid = 0";
-            }
-            $db->setQuery($query);
-            $jTemplate = $db->loadResult();
-        }
-
-        if (file_exists(JPATH_SITE.'/templates/'.$jTemplate.'/html/'.$pluginName.'/'.$tmpl.'/'.$file)) {
-            $p->file = JPATH_SITE.'/templates/'.$jTemplate.'/html/'.$pluginName.'/'.$tmpl.'/'.$file;
-            $p->http = JURI::root(true)."/templates/".$jTemplate."/html/{$pluginName}/{$tmpl}/{$file}";
-        } else {
-            if (version_compare(JVERSION, '2.5.0', 'ge')) {
-                // Joomla 1.6+
-                $p->file = JPATH_SITE.'/plugins/'.$pluginGroup.'/'.$pluginName.'/'.$pluginName.'/tmpl/'.$tmpl.'/'.$file;
-                $p->http = JURI::root(true)."/plugins/{$pluginGroup}/{$pluginName}/{$pluginName}/tmpl/{$tmpl}/{$file}";
-            } else {
-                // Joomla 1.5
-                $p->file = JPATH_SITE.'/plugins/'.$pluginGroup.'/'.$pluginName.'/tmpl/'.$tmpl.'/'.$file;
-                $p->http = JURI::root(true)."/plugins/{$pluginGroup}/{$pluginName}/tmpl/{$tmpl}/{$file}";
-            }
-        }
-        return $p;
-    }
-
     // Replace white space
-    private static function replaceWhiteSpace($text_to_parse)
+    private function replaceWhiteSpace($text_to_parse)
     {
         $source_html = array(" ");
         $replacement_html = array("%20");
@@ -298,10 +274,35 @@ class SimpleImageGalleryHelper
     }
 
     // Cleanup thumbnail filenames
-    private static function cleanThumbName($text_to_parse)
+    private function cleanThumbName($text_to_parse)
     {
         $source_html = array(' ', ',');
         $replacement_html = array('_', '_');
         return str_replace($source_html, $replacement_html, $text_to_parse);
+    }
+
+    // Path overrides
+    public function getTemplatePath($pluginName, $file, $tmpl)
+    {
+        $app = JFactory::getApplication();
+        $template = $app->getTemplate();
+
+        $p = new stdClass;
+
+        if (file_exists(JPATH_SITE.'/templates/'.$template.'/html/'.$pluginName.'/'.$tmpl.'/'.$file)) {
+            $p->file = JPATH_SITE.'/templates/'.$template.'/html/'.$pluginName.'/'.$tmpl.'/'.$file;
+            $p->http = JURI::root(true)."/templates/".$template."/html/{$pluginName}/{$tmpl}/{$file}";
+        } else {
+            if (version_compare(JVERSION, '2.5.0', 'ge')) {
+                // Joomla 2.5+
+                $p->file = JPATH_SITE.'/plugins/content/'.$pluginName.'/'.$pluginName.'/tmpl/'.$tmpl.'/'.$file;
+                $p->http = JURI::root(true)."/plugins/content/{$pluginName}/{$pluginName}/tmpl/{$tmpl}/{$file}";
+            } else {
+                // Joomla 1.5
+                $p->file = JPATH_SITE.'/plugins/content/'.$pluginName.'/tmpl/'.$tmpl.'/'.$file;
+                $p->http = JURI::root(true)."/plugins/content/{$pluginName}/tmpl/{$tmpl}/{$file}";
+            }
+        }
+        return $p;
     }
 }

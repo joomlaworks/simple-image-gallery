@@ -5,9 +5,9 @@
     <authorEmail>please-use-the-contact-form@joomlaworks.net</authorEmail>
     <authorUrl>https://www.joomlaworks.net</authorUrl>
     <copyright>Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.</copyright>
-    <creationDate>January 11th, 2020</creationDate>
+    <creationDate>January 14th, 2020</creationDate>
     <license>https://www.gnu.org/licenses/gpl.html GNU/GPL</license>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
     <description>JW_PLG_SIG_XML_DESC</description>
     <!-- Parameters -->
     <params>
