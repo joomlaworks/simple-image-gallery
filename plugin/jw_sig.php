@@ -281,7 +281,7 @@ class plgContentJw_sig extends JPlugin
                         if (version_compare(JVERSION, '3.0', 'ge')) {
                             JHtml::_('jquery.framework');
                         } else {
-                            $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/'.$jQueryHandling.'/jquery.min.js');
+                            $document->addScript('https://cdn.jsdelivr.net/npm/jquery@'.$jQueryHandling.'/dist/jquery.min.js');
                         }
                     }
 
