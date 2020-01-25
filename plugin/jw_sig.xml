@@ -14,6 +14,7 @@
         <fields name="params">
             <fieldset name="basic">
                 <field name="galleries_rootfolder" type="text" default="images" label="JW_PLG_SIG_ROOTFOLDER" description="JW_PLG_SIG_ROOTFOLDER_DESC" />
+                <field name="mootools" type="checkbox" checked="1" label="JW_PLG_SIG_MOOTOOLS" description="JW_PLG_SIG_MOOTOOLS_DESC" value="1" />
                 <field name="thb_width" type="text" default="360" size="3" label="JW_PLG_SIG_TW" description="JW_PLG_SIG_TW_DESC" />
                 <field name="thb_height" type="text" default="240" size="3" label="JW_PLG_SIG_TH" description="JW_PLG_SIG_TH_DESC" />
                 <field name="jpg_quality" type="text" default="90" size="3" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
