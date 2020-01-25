@@ -25,6 +25,7 @@
         <param name="jpg_quality" type="text" default="90" size="6" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
         <param name="cache_expire_time" type="text" default="86400" size="6" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
         <param name="memoryLimit" type="text" default="" size="6" label="JW_PLG_SIG_ML" description="JW_PLG_SIG_ML_DESC" />
+        <param name="fancybox_version" type="text" hint="3.5.7" default="3.5.7" label="JW_PLG_SIG_FB_VERSION" description="JW_PLG_SIG_FB_VERSION_DESC" />
     </params>
     <!-- Files -->
     <files folder="plugin" destination="jw_sig">

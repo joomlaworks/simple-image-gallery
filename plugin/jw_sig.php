@@ -164,6 +164,8 @@ class plgContentJw_sig extends JPlugin
         $jpg_quality = $pluginParams->get('jpg_quality', 80);
         $showcaptions = 0;
         $cache_expire_time = $pluginParams->get('cache_expire_time', 3600) * 60; // Cache expiration time in minutes
+        $fancybox_version = $pluginParams->get('fancybox_version', '3.5.7');
+
         // Advanced
         $memoryLimit = (int)$pluginParams->get('memoryLimit');
         if ($memoryLimit) {

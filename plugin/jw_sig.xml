@@ -19,6 +19,7 @@
                 <field name="jpg_quality" type="text" default="90" size="3" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
                 <field name="cache_expire_time" type="text" default="86400" size="3" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
                 <field name="memoryLimit" type="text" default="" size="3" label="JW_PLG_SIG_ML" description="JW_PLG_SIG_ML_DESC" />
+                <field name="fancybox_version" type="text" hint="3.5.7" default="3.5.7" label="JW_PLG_SIG_FB_VERSION" description="JW_PLG_SIG_FB_VERSION_DESC" />
             </fieldset>
         </fields>
     </config>

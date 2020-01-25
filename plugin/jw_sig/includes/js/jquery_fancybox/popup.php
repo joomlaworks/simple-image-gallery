@@ -14,11 +14,11 @@ $extraClass = 'fancybox-gallery';
 $customLinkAttributes = 'data-fancybox="gallery'.$gal_id.'"';
 
 $stylesheets = array(
-    'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css'
+    'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@'.$fancybox_version.'/dist/jquery.fancybox.min.css'
 );
 $stylesheetDeclarations = array();
 $scripts = array(
-    'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js'
+    'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@'.$fancybox_version.'/dist/jquery.fancybox.min.js'
 );
 
 if(!defined('PE_FANCYBOX_LOADED')){
