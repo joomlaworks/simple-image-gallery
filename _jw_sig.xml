@@ -19,6 +19,22 @@
                 <field name="jpg_quality" type="text" default="90" size="3" label="JW_PLG_SIG_TQ" description="JW_PLG_SIG_TQ_DESC" />
                 <field name="cache_expire_time" type="text" default="86400" size="3" label="JW_PLG_SIG_TCEXP" description="JW_PLG_SIG_TCEXP_DESC" />
                 <field name="memoryLimit" type="text" default="" size="3" label="JW_PLG_SIG_ML" description="JW_PLG_SIG_ML_DESC" />
+                <field name="fancybox_language" type="list" default="en" label="JW_PLG_SIG_FB_LANG" description="JW_PLG_SIG_FB_LANG_DESC">
+                    <option value="en">JW_PLG_SIG_FB_LANG_OPT_EN</option>
+                    <option value="de">JW_PLG_SIG_FB_LANG_OPT_DE</option>
+                    <option value="xx">JW_PLG_SIG_FB_LANG_OPT_XX</option>
+                </field>
+                <field name="fancybox_close" type="text" default="" hint="JW_PLG_SIG_FB_CLOSE" label="JW_PLG_SIG_FB_LANG_CLOSE" description="JW_PLG_SIG_FB_LANG_CLOSE_DESC" />
+                <field name="fancybox_next" type="text" default="" hint="JW_PLG_SIG_FB_NEXT" label="JW_PLG_SIG_FB_LANG_NEXT" description="JW_PLG_SIG_FB_LANG_NEXT_DESC" />
+                <field name="fancybox_prev" type="text" default="" hint="JW_PLG_SIG_FB_PREVIOUS" label="JW_PLG_SIG_FB_LANG_PREV" description="JW_PLG_SIG_FB_LANG_PREV_DESC" />
+                <field name="fancybox_error" type="text" default="" hint="JW_PLG_SIG_FB_REQUEST_CANNOT_BE_LOADED" label="JW_PLG_SIG_FB_LANG_ERROR" description="JW_PLG_SIG_FB_LANG_ERROR_DESC" />
+                <field name="fancybox_play_start" type="text" default="" hint="JW_PLG_SIG_FB_START_SLIDESHOW" label="JW_PLG_SIG_FB_LANG_PLAY_START" description="JW_PLG_SIG_FB_LANG_PLAY_START_DESC" />
+                <field name="fancybox_play_stop" type="text" default="" hint="JW_PLG_SIG_FB_PAUSE_SLIDESHOW" label="JW_PLG_SIG_FB_LANG_PLAY_STOP" description="JW_PLG_SIG_FB_LANG_PLAY_STOP_DESC" />
+                <field name="fancybox_full_screen" type="text" default="" hint="JW_PLG_SIG_FB_FULL_SCREEN" label="JW_PLG_SIG_FB_LANG_FULL_SCREEN" description="JW_PLG_SIG_FB_LANG_FULL_SCREEN_DESC" />
+                <field name="fancybox_thumbs" type="text" default="" hint="JW_PLG_SIG_FB_THUMBS" label="JW_PLG_SIG_FB_LANG_THUMBS" description="JW_PLG_SIG_FB_LANG_THUMBS_DESC" />
+                <field name="fancybox_download" type="text" default="" hint="JW_PLG_SIG_FB_DOWNLOAD" label="JW_PLG_SIG_FB_LANG_DOWNLOAD" description="JW_PLG_SIG_FB_LANG_DOWNLOAD_DESC" />
+                <field name="fancybox_share" type="text" default="" hint="JW_PLG_SIG_FB_SHARE" label="JW_PLG_SIG_FB_LANG_SHARE" description="JW_PLG_SIG_FB_LANG_SHARE_DESC" />
+                <field name="fancybox_zoom" type="text" default="" hint="JW_PLG_SIG_FB_ZOOM" label="JW_PLG_SIG_FB_LANG_ZOOM" description="JW_PLG_SIG_FB_LANG_ZOOM_DESC" />
             </fieldset>
         </fields>
     </config>

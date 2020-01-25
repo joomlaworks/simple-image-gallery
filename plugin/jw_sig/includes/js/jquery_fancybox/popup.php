@@ -23,6 +23,22 @@ $scripts = array(
 
 if(!defined('PE_FANCYBOX_LOADED')){
     define('PE_FANCYBOX_LOADED', true);
+    $customLanguage = '';
+    if($fancybox_language == 'xx') {
+        $customLanguage = "$.fancybox.defaults.i18n.en = {
+                    CLOSE: '".$fancybox_close."',
+                    NEXT: '".$fancybox_next."',
+                    PREV: '".$fancybox_prev."',
+                    ERROR: '".$fancybox_error."',
+                    PLAY_START: '".$fancybox_play_start."',
+                    PLAY_STOP: '".$fancybox_play_stop."',
+                    FULL_SCREEN: '".$fancybox_full_screen."',
+                    THUMBS: '".$fancybox_thumbs."',
+                    DOWNLOAD: '".$fancybox_download."',
+                    SHARE: '".$fancybox_share."',
+                    ZOOM: '".$fancybox_zoom."'
+                };";
+    }
     $scriptDeclarations = array("
         (function($) {
             $(document).ready(function() {
@@ -39,7 +55,8 @@ if(!defined('PE_FANCYBOX_LOADED')){
                     SHARE: '".JText::_('JW_PLG_SIG_FB_SHARE')."',
                     ZOOM: '".JText::_('JW_PLG_SIG_FB_ZOOM')."'
                 };
-                $.fancybox.defaults.lang = 'en';
+                ".$customLanguage."
+                $.fancybox.defaults.lang = '".$fancybox_language."';
                 $('a.fancybox-gallery').fancybox({
                     buttons: [
                         'slideShow',

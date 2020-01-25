@@ -164,6 +164,19 @@ class plgContentJw_sig extends JPlugin
         $jpg_quality = $pluginParams->get('jpg_quality', 80);
         $showcaptions = 0;
         $cache_expire_time = $pluginParams->get('cache_expire_time', 3600) * 60; // Cache expiration time in minutes
+        $fancybox_language = $pluginParams->get('fancybox_language', 'en');
+        $fancybox_close = $pluginParams->get('fancybox_close', JText::_('JW_PLG_SIG_FB_CLOSE'));
+        $fancybox_next = $pluginParams->get('fancybox_next', JText::_('JW_PLG_SIG_FB_NEXT'));
+        $fancybox_prev = $pluginParams->get('fancybox_prev', JText::_('JW_PLG_SIG_FB_PREVIOUS'));
+        $fancybox_error = $pluginParams->get('fancybox_error', JText::_('JW_PLG_SIG_FB_REQUEST_CANNOT_BE_LOADED'));
+        $fancybox_play_start = $pluginParams->get('fancybox_play_start', JText::_('JW_PLG_SIG_FB_START_SLIDESHOW'));
+        $fancybox_play_stop = $pluginParams->get('fancybox_play_stop', JText::_('JW_PLG_SIG_FB_PAUSE_SLIDESHOW'));
+        $fancybox_full_screen = $pluginParams->get('fancybox_full_screen', JText::_('JW_PLG_SIG_FB_FULL_SCREEN'));
+        $fancybox_thumbs = $pluginParams->get('fancybox_thumbs', JText::_('JW_PLG_SIG_FB_THUMBS'));
+        $fancybox_download = $pluginParams->get('fancybox_download', JText::_('JW_PLG_SIG_FB_DOWNLOAD'));
+        $fancybox_share = $pluginParams->get('fancybox_share', JText::_('JW_PLG_SIG_FB_SHARE'));
+        $fancybox_zoom = $pluginParams->get('fancybox_zoom', JText::_('JW_PLG_SIG_FB_ZOOM'));
+
         // Advanced
         $memoryLimit = (int)$pluginParams->get('memoryLimit');
         if ($memoryLimit) {
