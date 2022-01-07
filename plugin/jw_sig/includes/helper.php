@@ -1,9 +1,9 @@
 <?php
 /**
- * @version      4.1.0
+ * @version      4.2
  * @package      Simple Image Gallery (plugin)
  * @author       JoomlaWorks - https://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
+ * @copyright    Copyright (c) 2006 - 2022 JoomlaWorks Ltd. All rights reserved.
  * @license      GNU/GPL license: https://www.gnu.org/licenses/gpl.html
  */
 
@@ -143,7 +143,12 @@ class SimpleImageGalleryHelper
 
                 // Bail out if the image resource is not OK
                 if (!$source) {
-                    JError::raiseNotice('', JText::_('JW_PLG_SIG_ERROR_SRC_IMGS'));
+                    if (version_compare(JVERSION, '4', 'ge')) {
+                        $app = JFactory::getApplication();
+                        $app->enqueueMessage(JText::_('JW_PLG_SIG_ERROR_SRC_IMGS'), 'notice');
+                    } else {
+                        JError::raiseNotice('', JText::_('JW_PLG_SIG_ERROR_SRC_IMGS'));
+                    }
                     return;
                 }
 

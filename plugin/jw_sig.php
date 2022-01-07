@@ -1,9 +1,9 @@
 <?php
 /**
- * @version      4.1.0
+ * @version      4.2
  * @package      Simple Image Gallery (plugin)
  * @author       JoomlaWorks - https://www.joomlaworks.net
- * @copyright    Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.
+ * @copyright    Copyright (c) 2006 - 2022 JoomlaWorks Ltd. All rights reserved.
  * @license      GNU/GPL license: https://www.gnu.org/licenses/gpl.html
  */
 
@@ -21,9 +21,9 @@ class plgContentJw_sig extends JPlugin
     // JoomlaWorks reference parameters
     public $plg_name             = "jw_sig";
     public $plg_tag              = "gallery";
-    public $plg_version          = "4.1.0";
-    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.1.0) starts here -->\n";
-    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.1.0) ends here -->\n\n";
+    public $plg_version          = "4.2";
+    public $plg_copyrights_start = "\n\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.2) starts here -->\n";
+    public $plg_copyrights_end   = "\n<!-- JoomlaWorks \"Simple Image Gallery\" Plugin (v4.2) ends here -->\n\n";
 
     public function __construct(&$subject, $params)
     {
@@ -119,11 +119,19 @@ class plgContentJw_sig extends JPlugin
 
         // Check for basic requirements
         if (!extension_loaded('gd') && !function_exists('gd_info')) {
-            JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_01'));
+            if (version_compare(JVERSION, '4', 'ge')) {
+                $app->enqueueMessage(JText::_('JW_PLG_SIG_NOTICE_01'), 'notice');
+            } else {
+                JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_01'));
+            }
             return;
         }
         if (!is_writable($sitePath.'/cache')) {
-            JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_02'));
+            if (version_compare(JVERSION, '4', 'ge')) {
+                $app->enqueueMessage(JText::_('JW_PLG_SIG_NOTICE_02'), 'notice');
+            } else {
+                JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_02'));
+            }
             return;
         }
 
@@ -134,7 +142,11 @@ class plgContentJw_sig extends JPlugin
 
         // Check if Simple Image Gallery Free (old) is present and show a warning
         if (JPluginHelper::isEnabled('content', 'jw_simpleImageGallery') == true) {
-            JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_OLD_SIG'));
+            if (version_compare(JVERSION, '4', 'ge')) {
+                $app->enqueueMessage(JText::_('JW_PLG_SIG_NOTICE_OLD_SIG'), 'notice');
+            } else {
+                JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_OLD_SIG'));
+            }
             return;
         }
 
@@ -233,7 +245,11 @@ class plgContentJw_sig extends JPlugin
                 $gallery = $SIGHelper->renderGallery();
 
                 if (!$gallery) {
-                    JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_03').' '.$srcimgfolder);
+                    if (version_compare(JVERSION, '4', 'ge')) {
+                        $app->enqueueMessage(JText::_('JW_PLG_SIG_NOTICE_03'), 'notice');
+                    } else {
+                        JError::raiseNotice('', JText::_('JW_PLG_SIG_NOTICE_03'));
+                    }
                     continue;
                 }
 

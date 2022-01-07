@@ -4,10 +4,10 @@
     <author>JoomlaWorks</author>
     <authorEmail>please-use-the-contact-form@joomlaworks.net</authorEmail>
     <authorUrl>https://www.joomlaworks.net</authorUrl>
-    <copyright>Copyright (c) 2006 - 2020 JoomlaWorks Ltd. All rights reserved.</copyright>
-    <creationDate>January 28th, 2020</creationDate>
+    <copyright>Copyright (c) 2006 - 2022 JoomlaWorks Ltd. All rights reserved.</copyright>
+    <creationDate>January 7th, 2022</creationDate>
     <license>https://www.gnu.org/licenses/gpl.html GNU/GPL</license>
-    <version>4.1.0</version>
+    <version>4.2</version>
     <description>JW_PLG_SIG_XML_DESC</description>
     <!-- Parameters -->
     <params>
