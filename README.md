@@ -31,7 +31,7 @@ You can see a demo of the plugin here: [https://demo.joomlaworks.net/simple-imag
 Visit the Simple Image Gallery product page at: [https://www.joomlaworks.net/simple-image-gallery](https://www.joomlaworks.net/simple-image-gallery)
 
 ### COMPATIBILITY & LICENSE
-Simple Image Gallery is PHP5 and PHP7 compatible and fully compatible with Joomla versions 1.5, 2.5, 3.x and the upcoming 4.x.
+Simple Image Gallery is PHP 5, PHP 7 & PHP 8 compatible and supports Joomla versions 1.5, 2.5, 3.x and 4.x.
 
 Joomla 1.5 must have the "Mootools Upgrade" system plugin enabled to avoid JavaScript conflicts between Mootools and newer jQuery releases used by the plugin.
 
