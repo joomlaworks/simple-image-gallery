@@ -9,6 +9,10 @@
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
+use Joomla\CMS\Plugin\CMSPlugin as JPlugin;
+use Joomla\CMS\Factory as JFactory;
+use Joomla\CMS\Language\Text as JText;
+use Joomla\CMS\HTML\HTMLHelper as JHtml;
 
 $extraClass = 'fancybox-gallery';
 $customLinkAttributes = 'data-fancybox="gallery'.$gal_id.'"';

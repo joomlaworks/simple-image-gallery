@@ -9,7 +9,12 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-
+use Joomla\CMS\Factory as JFactory;
+use Joomla\CMS\Uri\Uri as JUri;
+use Joomla\CMS\Filesystem\Folder as JFolder;
+use Joomla\CMS\Filesystem\File as JFile;
+use Joomla\CMS\Object\CMSObject as JObject;
+ 
 class SimpleImageGalleryHelper
 {
     public $srcimgfolder;
@@ -20,6 +25,34 @@ class SimpleImageGalleryHelper
     public $cache_expire_time;
     public $gal_id;
     public $format;
+	
+	public function read_image($original_file)	
+	{
+		$original_extension = strtolower(pathinfo($original_file, PATHINFO_EXTENSION));
+		$exif_data = exif_read_data($original_file);
+		$exif_orientation = $exif_data['Orientation'];
+		// load the image
+		if($original_extension == "jpg" or $original_extension == "jpeg"){
+			$original_image = imagecreatefromjpeg($original_file);
+		}
+		if($original_extension == "gif"){
+			$original_image = imagecreatefromgif($original_file);
+		}
+		if($original_extension == "png"){
+			$original_image = imagecreatefrompng($original_file);
+		}
+		 if($exif_orientation=='3'  or $exif_orientation=='6' or $exif_orientation=='8'){		   
+			$new_angle[3] = 180;
+			$new_angle[6] = -90;
+			$new_angle[8] = 90;
+			imagesetinterpolation($original_image, IMG_MITCHELL);
+			$rotated_image = imagerotate($original_image, $new_angle[$exif_orientation], 0);
+			imagedestroy($original_image); 
+		}else {
+			$rotated_image  = $original_image;
+		}	 
+		return $rotated_image;
+	}
 
     public function renderGallery()
     {
@@ -39,16 +72,18 @@ class SimpleImageGalleryHelper
         // Path assignment
         $sitePath = JPATH_SITE.'/';
         if ($format == 'feed') {
-            $siteUrl = JURI::root(true).'';
+            $siteUrl = JUri::root(true).'';
         } else {
-            $siteUrl = JURI::root(true).'/';
+            $siteUrl = JUri::root(true).'/';
         }
 
         // Internal parameters
         $prefix = "jw_sig_cache_";
 
         // Set the cache folder
-        $cacheFolderPath = JPATH_SITE.'/cache/jw_sig';
+        //$cacheFolderPath = JPATH_SITE.'/cache/jw_sig';
+        $cacheFolderPath = $sitePath.$srcimgfolder . '/jw_sig';
+        $cacheFolderUrl = $siteUrl.$srcimgfolder . '/jw_sig';
         if (file_exists($cacheFolderPath) && is_dir($cacheFolderPath)) {
             // all OK
         } else {
@@ -113,22 +148,17 @@ class SimpleImageGalleryHelper
                 // Otherwise create the thumb image
 
                 // Begin by getting the details of the original
-                list($width, $height, $type) = getimagesize($original);
+                list($originalwidth, $originalheight, $type) = getimagesize($original);
 
                 // Create an image resource for the original
                 switch ($type) {
-                    case 1:
-                        // GIF
-                        $source = imagecreatefromgif($original);
-                        break;
+                    case 1:    
                     case 2:
-                        // JPEG
-                        $source = imagecreatefromjpeg($original);
-                        break;
                     case 3:
-                        // PNG
-                        $source = imagecreatefrompng($original);
-                        break;
+      			    //take into account orientation see https://www.php.net/manual/en/function.exif-read-data.php#121742
+					$source = $this->read_image($original);
+
+                       break;
                     case 18:
                         // WEBP
                         if (version_compare(PHP_VERSION, '7.1.0', 'ge')) {
@@ -141,6 +171,8 @@ class SimpleImageGalleryHelper
                         $source = null;
                 }
 
+
+
                 // Bail out if the image resource is not OK
                 if (!$source) {
                     if (version_compare(JVERSION, '4', 'ge')) {
@@ -151,9 +183,10 @@ class SimpleImageGalleryHelper
                     }
                     return;
                 }
-
+			  $width  = imagesx($source);
+			  $height = imagesy($source);
                 // Calculate thumbnails
-                $thumbnail = $this->thumbDimCalc($width, $height, $thb_width, $thb_height, $smartResize);
+                $thumbnail = $this->thumbDimCalc($width, $height, ($thb_width * $width)/$originalwidth, ($thb_height * $height) /$originalheight, $smartResize);
 
                 $thumb_width = $thumbnail['width'];
                 $thumb_height = $thumbnail['height'];
@@ -180,7 +213,8 @@ class SimpleImageGalleryHelper
             // Assemble the image elements
             $gallery[$key]->filename = $filename;
             $gallery[$key]->sourceImageFilePath = $siteUrl.$srcimgfolder.'/'.$this->replaceWhiteSpace($filename);
-            $gallery[$key]->thumbImageFilePath = $siteUrl.'cache/jw_sig/'.$prefix.$gal_id.'_'.strtolower($this->cleanThumbName($thumbfilename));
+            //$gallery[$key]->thumbImageFilePath = $siteUrl.'cache/jw_sig/'.$prefix.$gal_id.'_'.strtolower($this->cleanThumbName($thumbfilename));
+            $gallery[$key]->thumbImageFilePath = $cacheFolderUrl.'/' . $prefix.$gal_id.'_'.strtolower($this->cleanThumbName($thumbfilename));
             $gallery[$key]->width = $thb_width;
             $gallery[$key]->height = $thb_height;
         }
@@ -296,16 +330,16 @@ class SimpleImageGalleryHelper
 
         if (file_exists(JPATH_SITE.'/templates/'.$template.'/html/'.$pluginName.'/'.$tmpl.'/'.$file)) {
             $p->file = JPATH_SITE.'/templates/'.$template.'/html/'.$pluginName.'/'.$tmpl.'/'.$file;
-            $p->http = JURI::root(true)."/templates/".$template."/html/{$pluginName}/{$tmpl}/{$file}";
+            $p->http = JUri::root(true)."/templates/".$template."/html/{$pluginName}/{$tmpl}/{$file}";
         } else {
             if (version_compare(JVERSION, '2.5.0', 'ge')) {
                 // Joomla 2.5+
                 $p->file = JPATH_SITE.'/plugins/content/'.$pluginName.'/'.$pluginName.'/tmpl/'.$tmpl.'/'.$file;
-                $p->http = JURI::root(true)."/plugins/content/{$pluginName}/{$pluginName}/tmpl/{$tmpl}/{$file}";
+                $p->http = JUri::root(true)."/plugins/content/{$pluginName}/{$pluginName}/tmpl/{$tmpl}/{$file}";
             } else {
                 // Joomla 1.5
                 $p->file = JPATH_SITE.'/plugins/content/'.$pluginName.'/tmpl/'.$tmpl.'/'.$file;
-                $p->http = JURI::root(true)."/plugins/content/{$pluginName}/tmpl/{$tmpl}/{$file}";
+                $p->http = JUri::root(true)."/plugins/content/{$pluginName}/tmpl/{$tmpl}/{$file}";
             }
         }
         return $p;
