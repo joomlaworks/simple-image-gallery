@@ -19,7 +19,7 @@ ul.sigFreeClassic {margin:8px auto!important;padding:8px 0!important;list-style:
 /* Thumbnails */
 ul.sigFreeClassic li.sigFreeThumb {float:left;background:#fff!important;margin:0 1px 1px 0;padding:0;list-style:none!important;}
 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink,
-ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {display:block;float:left;padding:0;margin:0;border:0;background-color:#000;position:relative;}
+ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {display:block;float:left;padding:0;margin:0;border:0;background-color:#FFF;position:relative;}
 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink {}
 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink:hover {}
 ul.sigFreeClassic li.sigFreeThumb a.sigFreeLink img.sigFreeImg,
